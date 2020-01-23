@@ -1,0 +1,8 @@
+Op-Type,Sample-Type,Op-Count,Byte-Count,Avg-ResTime,Avg-ProcTime,Throughput,Bandwidth,Succ-Ratio
+init,write,0,0,N/A,N/A,0,0,N/A
+prepare,write,8064,129024000,132.94,132.83,15.05,240747.68,100%
+write,write,746,3878528,2448.47,2448.44,6.54,33949.98,100%
+read,read,9273,148368000,206.88,206.8,77.34,1237393.13,100%
+cleanup,delete,8064,0,100.14,100.14,19.99,0,100%
+cleanup,delete,49644,0,50.29,50.29,39.77,0,100%
+dispose,delete,0,0,N/A,N/A,0,0,N/A

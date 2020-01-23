@@ -1,0 +1,4 @@
+Timestamp,Op-Count,Byte-Count,Avg-ResTime,Avg-ProcTime,Throughput,Bandwidth,Succ-Ratio,Version-Info,,
+,cleanup-delete,cleanup-delete,cleanup-delete,cleanup-delete,cleanup-delete,cleanup-delete,cleanup-delete,Min-Version,Version,Max-Version
+23:11:22,702,0,173.18,173.18,337.46,0,100%,0,0,0
+23:11:27,644,0,159.73,159.73,358.17,0,100%,0,0,1

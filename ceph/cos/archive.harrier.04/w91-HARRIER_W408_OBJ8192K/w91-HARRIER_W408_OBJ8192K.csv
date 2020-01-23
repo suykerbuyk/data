@@ -1,0 +1,7 @@
+Stage,Op-Name,Op-Type,Op-Count,Byte-Count,Avg-ResTime,Avg-ProcTime,60%-ResTime,80%-ResTime,90%-ResTime,95%-ResTime,99%-ResTime,100%-ResTime,Throughput,Bandwidth,Succ-Ratio,Status,Detailed Status
+s1-init,init-write,init,0,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,N/A,completed,waiting @ 2020-01-14 15:55:14,booting @ 2020-01-17 21:41:57,submitting @ 2020-01-17 21:41:57,authing @ 2020-01-17 21:41:57,launching @ 2020-01-17 21:41:57,running @ 2020-01-17 21:41:57,closing @ 2020-01-17 21:42:02,completed @ 2020-01-17 21:42:02
+s2-prepare,prepare-write,prepare,164160,1344798720000,919.26,864.57,840,1240,1610,2000,4220,68840,44.74,366513861.69,100%,terminated,waiting @ 2020-01-14 15:55:14,booting @ 2020-01-17 21:42:04,submitting @ 2020-01-17 21:42:04,authing @ 2020-01-17 21:42:04,launching @ 2020-01-17 21:42:05,running @ 2020-01-17 21:42:05,closing @ 2020-01-17 22:47:26,terminated @ 2020-01-17 22:47:27
+test_write,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,aborted,waiting @ 2020-01-14 15:55:14,aborted @ 2020-01-17 22:47:27
+test_read,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,aborted,waiting @ 2020-01-14 15:55:14,aborted @ 2020-01-17 22:47:27
+cleanup,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,aborted,waiting @ 2020-01-14 15:55:14,aborted @ 2020-01-17 22:47:27
+dispose,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,aborted,waiting @ 2020-01-14 15:55:14,aborted @ 2020-01-17 22:47:27

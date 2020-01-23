@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="HARRIER_W048_OBJ016K"
+    description="HARRIER_TEST_Workers=048_OBJ_SIZE=016K" config="">
+    <auth type="none"/>
+    <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+    <workflow config="">
+        <workstage name="init" closuredelay="0" config="">
+            <auth type="none"/>
+            <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+            <work name="init" type="init" workers="48" interval="5"
+                division="container" runtime="0" rampup="0" rampdown="0"
+                afr="0" totalOps="48" totalBytes="0" config="cprefix=s3harrier;containers=r(1,12)">
+                <auth type="none"/>
+                <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+                <operation type="init" ratio="100" division="container"
+                    config="cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);objects=r(0,0);sizes=c(0)B;cprefix=s3harrier;containers=r(1,12)" id="op1"/>
+            </work>
+        </workstage>
+        <workstage name="prepare" closuredelay="0" config="">
+            <auth type="none"/>
+            <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+            <work name="prepare" type="prepare" workers="48"
+                interval="5" division="object" runtime="0" rampup="0"
+                rampdown="0" afr="0" totalOps="48" totalBytes="0" config="cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB">
+                <auth type="none"/>
+                <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+                <operation type="prepare" ratio="100" division="object"
+                    config="cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB;createContainer=false;cprefix=s3harrier;containers=r(1,12);objects=r(1,10);sizes=c(16)KB" id="op1"/>
+            </work>
+        </workstage>
+        <workstage name="test_write" closuredelay="0" config="">
+            <auth type="none"/>
+            <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+            <work name="main" type="normal" workers="48" interval="5"
+                division="none" runtime="360" rampup="0" rampdown="0"
+                afr="200000" totalOps="0" totalBytes="0" config="">
+                <auth type="none"/>
+                <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+                <operation type="write" ratio="100" division="none"
+                    config="cprefix=s3harrier;containers=u(1,12);objects=u(1,64);sizes=c(16)KB" id="op1"/>
+            </work>
+        </workstage>
+        <workstage name="test_read" closuredelay="0" config="">
+            <auth type="none"/>
+            <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+            <work name="main" type="normal" workers="48" interval="5"
+                division="none" runtime="360" rampup="0" rampdown="0"
+                afr="200000" totalOps="0" totalBytes="0" config="">
+                <auth type="none"/>
+                <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+                <operation type="read" ratio="100" division="none"
+                    config="cprefix=s3harrier;containers=u(1,12);objects=u(1,64)" id="op1"/>
+            </work>
+        </workstage>
+        <workstage name="cleanup" closuredelay="0" config="">
+            <auth type="none"/>
+            <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+            <work name="cleanup" type="cleanup" workers="48"
+                interval="5" division="object" runtime="0" rampup="0"
+                rampdown="0" afr="0" totalOps="48" totalBytes="0" config="cprefix=s3harrier;containers=r(1,12);objects=r(1,64)">
+                <auth type="none"/>
+                <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+                <operation type="cleanup" ratio="100" division="object"
+                    config="cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);cprefix=s3harrier;containers=r(1,12);objects=r(1,64);deleteContainer=false;cprefix=s3harrier;containers=r(1,12);objects=r(1,64)" id="op1"/>
+            </work>
+        </workstage>
+        <workstage name="dispose" closuredelay="0" config="">
+            <auth type="none"/>
+            <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+            <work name="dispose" type="dispose" workers="48"
+                interval="5" division="container" runtime="0" rampup="0"
+                rampdown="0" afr="0" totalOps="48" totalBytes="0" config="cprefix=s3harrier;containers=r(1,12)">
+                <auth type="none"/>
+                <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com"/>
+                <operation type="dispose" ratio="100"
+                    division="container"
+                    config="cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);cprefix=s3harrier;containers=r(1,12);objects=r(0,0);sizes=c(0)B;cprefix=s3harrier;containers=r(1,12)" id="op1"/>
+            </work>
+        </workstage>
+    </workflow>
+</workload>
