@@ -17,6 +17,8 @@ for DEV in $( ls /dev/disk/by-path/ | \
 	echo "mdadm --zero-superblock $dev1"
 	mdadm --zero-superblock $dev1
 	mdadm --zero-superblock $dev2
+	wipefs -a ${dev1}
+	wipefs -a ${dev2}
 done
-
+partprobe
 
