@@ -7,7 +7,7 @@ parse_for_zfs_config() {
      CSV_FILE="${TEST}.csv"
      echo "Creating: ${CSV_FILE}"
      HEADER="config,timestamp,fio_pattern,ioengine,direct,iodepth,job_name"
-     HEADER="${HEADER},blocksize,filesize,numjobs,runtime_secs,read_io_bytes"
+     HEADER="${HEADER},blocksize,numjobs,runtime_secs,read_io_bytes"
      HEADER="${HEADER},read_bw_bytes,read_bw_mean,read_iops_mean,write_io_bytes"
      HEADER="${HEADER},write_bw_bytes,write_bw_mean,write_iops_mean"
      echo "${HEADER}">"${CSV_FILE}"
@@ -23,9 +23,8 @@ parse_for_zfs_config() {
             ."global options".iodepth,
             .jobs[]."job options".name,
             .jobs[]."job options".bs,
-            .jobs[]."job options".size,
-            .jobs[]."job options".numjobs,
-            .jobs[]."job options".runtime,
+            ."global options".numjobs,
+            ."global options".runtime,
             .jobs[].read.io_bytes,
             .jobs[].read.bw_bytes,
             .jobs[].read.bw_mean,
