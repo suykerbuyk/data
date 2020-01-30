@@ -70,10 +70,12 @@ test_mdraid(){
 			    --name="direct-${PAT}-${BLK}" \
 			    --group_reporting  \
 			    --bs=${BLK} \
-			    --output-format='json+' | tee  "${PAT}-${BLK}.mdraid.fio.direct.json"
+			    --output-format='json' | tee  "mdraid${RAID_CHUNK}k-${PAT}-${BLK}.fio.direct.json"
 		done
 	done
 }
+
+
 rm_mdraid
 mk_mdraid
 test_mdraid
