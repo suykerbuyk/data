@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FNAME_PREFIX="mdraid4k mdraid8k mdraid16k"
+FNAME_PREFIX="mdraid4k mdraid8k mdraid16k mdraid32k mdraid64k mdraid128k"
 
 parse_for_zfs_config() {
   for TEST in ${FNAME_PREFIX}; do
@@ -38,3 +38,13 @@ parse_for_zfs_config() {
   done
 }
 parse_for_zfs_config
+for F in $(ls *.csv); do cat $F | sed 's/,4k,/,0004k,/g'>${F}.new; mv -f ${F}.new ${F};done
+for F in $(ls *.csv); do cat $F | sed 's/,8k,/,0008k,/g'>${F}.new; mv -f ${F}.new ${F};done
+for F in $(ls *.csv); do cat $F | sed 's/,16k,/,0016k,/g'>${F}.new; mv -f ${F}.new ${F};done
+for F in $(ls *.csv); do cat $F | sed 's/,32k,/,0032k,/g'>${F}.new; mv -f ${F}.new ${F};done
+for F in $(ls *.csv); do cat $F | sed 's/,64k,/,0064k,/g'>${F}.new; mv -f ${F}.new ${F};done
+for F in $(ls *.csv); do cat $F | sed 's/,128k,/,0128k,/g'>${F}.new; mv -f ${F}.new ${F};done
+for F in $(ls *.csv); do cat $F | sed 's/,256k,/,0256k,/g'>${F}.new; mv -f ${F}.new ${F};done
+for F in $(ls *.csv); do cat $F | sed 's/,512k,/,0512k,/g'>${F}.new; mv -f ${F}.new ${F};done
+for F in $(ls *.csv); do cat $F | sed 's/,1M,/,1024k,/g'>${F}.new; mv -f ${F}.new ${F};done
+for F in $(ls *.csv); do cat $F | sed 's/,2M,/,2048k,/g'>${F}.new; mv -f ${F}.new ${F};done
