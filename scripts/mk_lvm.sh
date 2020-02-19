@@ -46,7 +46,6 @@ get_drv_inventory() {
 	NYTRO_LUN_COUNT=$(find_lun_count "$NYTRO_DSK_PREFIX")
 	TOTAL_DRV_COUNT=$((EVANS_DRV_COUNT + MACH2_DRV_COUNT + NYTRO_DRV_COUNT))
 	VG_COUNT=$(find_vg_count)
-	msg "Done fetching Drive inventory"
 }
 print_drv_inventory() {
 	msg "Detected $EVANS_DRV_COUNT Evans drives"
