@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+for d in 26 27 28; do scp ./mk_lvm.sh lr02u$d: ; done
+for d in 26 27 28; do ssh lr02u$d ./mk_lvm.sh ; done
 for d in 26 27 28; do ssh lr02u$d yum install -y docker; done
 for d in 26 27 28; do scp /etc/containers/registries.conf lr02u$d:/etc/containers/ ; done
 for d in 26 27 28; do scp /etc/sysconfig/docker lr02u$d:/etc/sysconfig/ ; done

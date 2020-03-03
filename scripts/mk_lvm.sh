@@ -5,7 +5,9 @@ GO_SLOW=0
 EVANS_DSK_PREFIX='scsi-35000c500a'
 MACH2_DSK_PREFIX='scsi-36000c500a'
 NYTRO_DSK_PREFIX='scsi-35000c5003'
-MACH2_STRIPE_SIZE=128k
+MACH2_STRIPE_SIZE=1024k
+MACH2_READ_AHEAD=131072
+MACH2_SCHEDULER='noop'
 DSK_PATH='/dev/disk/by-id'
 LVM_VG_PREFIX='sgt_vg'
 LVM_LV_PREFIX='sgt_lv'
@@ -78,6 +80,14 @@ rm_vg_devs() {
 		run "   pvremove -y $PVS"
 	done
 }
+
+set_drv_queue() {
+	if [[ -b /dev/${1} ]]
+	then
+		run "echo '${MACH2_SCHEDULER}' >/sys/block/${1}/queue/scheduler"       # noop, deadline, cfq
+		run "echo '${MACH2_READ_AHEAD}' >/sys/block/${1}/queue/read_ahead_kb" # Default = 4096
+	fi
+}
 mk_mach2_lvm() {
 	msg "Creating Mach2 LVM config"
 	IDX=0
@@ -86,14 +96,18 @@ mk_mach2_lvm() {
 	for DEV in $(find $DSK_PATH -name "${MACH2_DSK_PREFIX}*" | cut -c 1-38 | sort -u ); do
 		LUN_0="${DEV}${LUN_0_TAG}"
 		LUN_1="${DEV}${LUN_1_TAG}"
-		KDEV0="/dev/$(ls -lah $LUN_0 | awk -F '/' '{print $7}')"
-		KDEV1="/dev/$(ls -lah $LUN_1 | awk -F '/' '{print $7}')"
+		KDEV0="$(ls -lah $LUN_0 | awk -F '/' '{print $7}')"
+		KDEV1="$(ls -lah $LUN_1 | awk -F '/' '{print $7}')"
+		
+		set_drv_queue "${KDEV0}"
+		set_drv_queue "${KDEV1}"
+
 		IDX_STR=$(printf '%03d' $IDX)
 		VG_NAME="${LVM_VG_PREFIX}_data_${IDX_STR}"
 		LV_NAME="${LVM_LV_PREFIX}_data_${IDX_STR}"
 		msg "  Working on $DEV -> $KDEV0 $KDEV1"
-		run "    pvcreate $KDEV0 $KDEV1"
-		run "    vgcreate $VG_NAME $KDEV0 $KDEV1"
+		run "    pvcreate /dev/$KDEV0 /dev/$KDEV1"
+		run "    vgcreate $VG_NAME /dev/$KDEV0 /dev/$KDEV1"
 		run "    lvcreate -i ${MACH2_LUN_COUNT} -n $LV_NAME -l 100%FREE --type striped -I $MACH2_STRIPE_SIZE $VG_NAME"
 		IDX=$( expr $IDX + 1 )
 	done
@@ -103,6 +117,7 @@ mk_evans_lvm() {
 	IDX=0
 	for DEV in $( find ${DSK_PATH} -name "${EVANS_DSK_PREFIX}*" | cut -c 1-38 | sort -u ); do
 		KDEV="/dev/$(ls -lah $DEV | awk -F '/' '{print $7}')"
+		
 		msg "  Working on $DEV -> $KDEV"
 		run "    pvcreate ${KDEV}"
 
