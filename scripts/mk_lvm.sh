@@ -5,9 +5,11 @@ GO_SLOW=0
 EVANS_DSK_PREFIX='scsi-35000c500a'
 MACH2_DSK_PREFIX='scsi-36000c500a'
 NYTRO_DSK_PREFIX='scsi-35000c5003'
-MACH2_STRIPE_SIZE=1024k
-MACH2_READ_AHEAD=131072
-MACH2_SCHEDULER='noop'
+#MACH2_STRIPE_SIZE=1024k
+MACH2_STRIPE_SIZE=128k
+#OSD_READ_AHEAD=1048576
+OSD_READ_AHEAD=524288
+OSD_SCHEDULER='noop'
 DSK_PATH='/dev/disk/by-id'
 LVM_VG_PREFIX='sgt_vg'
 LVM_LV_PREFIX='sgt_lv'
@@ -84,8 +86,8 @@ rm_vg_devs() {
 set_drv_queue() {
 	if [[ -b /dev/${1} ]]
 	then
-		run "echo '${MACH2_SCHEDULER}' >/sys/block/${1}/queue/scheduler"       # noop, deadline, cfq
-		run "echo '${MACH2_READ_AHEAD}' >/sys/block/${1}/queue/read_ahead_kb" # Default = 4096
+		run "echo '${OSD_SCHEDULER}' >/sys/block/${1}/queue/scheduler"       # noop, deadline, cfq
+		run "echo '${OSD_READ_AHEAD}' >/sys/block/${1}/queue/read_ahead_kb" # Default = 4096
 	fi
 }
 mk_mach2_lvm() {
@@ -134,14 +136,15 @@ mk_nytro_lvm() {
 	msg "Creating Nytro LVM config"
 	IDX=0
 	for DEV in $( find ${DSK_PATH} -name "${NYTRO_DSK_PREFIX}*" | cut -c 1-38 | sort -u ); do
-		KDEV="/dev/$(ls -lah $DEV | awk -F '/' '{print $7}')"
+		KDEV="$(ls -lah $DEV | awk -F '/' '{print $7}')"
 		msg "  Working on $DEV -> $KDEV"
-		run "    pvcreate $KDEV"
+		set_drv_queue "${KDEV0}"
+		run "    pvcreate /dev/$KDEV"
 
 		IDX_STR=$(printf '%03d' $IDX)
 		VG_NAME="${LVM_VG_PREFIX}_db_${IDX_STR}"
 		LV_NAME="${LVM_LV_PREFIX}_db_${IDX_STR}"
-		run "    vgcreate ${VG_NAME} ${KDEV}"
+		run "    vgcreate ${VG_NAME} /dev/${KDEV}"
 		run "    lvcreate -n ${LV_NAME}_0 -L 700G ${VG_NAME}"
 		run "    lvcreate -n ${LV_NAME}_1 -L 700G ${VG_NAME}"
 		run "    lvcreate -n ${LV_NAME}_2 -L 700G ${VG_NAME}"
