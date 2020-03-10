@@ -9,7 +9,7 @@ DriverProcessCount=8
 DriverWorkerCount=$((DriverNodeCount * DriverProcessCount))
 OsdCount=36
 
-FILE_PAT="MACH2_128K_STRIPE_SSD_512K_RA_SCH_NOOP"
+FILE_PAT="EVANS_SSD_128K_RA_SCH_NOOP"
 get_avg() {
 	source_file="$1"
 	search_trigger="$2"
@@ -61,16 +61,15 @@ parse_csv_file() {
 		worker_cnt=$(echo "$BF" | sed 's/_/ /g' | sed 's/.csv//g' | sed 's/OBJ//g' | sed 's/ W/ /g' | cut -d ' ' -f $(($DELIM_CNT +2)))
 		obj_size=$(echo "0000${obj_size}"| grep -o '.....$')
 		worker_cnt=$(echo "0000${worker_cnt}" | grep -o '....$')
-		# test_write_bw=$((write_bandwidth * DriverWorkerCount))
-		# test_write_bw=$(echo "     ${test_write_bw}" | grep -o '........$')
-		# test_write_iops=$((write_iops * DriverWorkerCount))
-		# test_write_iops=$(echo "     ${test_write_iops}" | grep -o '........$')
-		# test_read_bw=$((read_bandwidth * DriverWorkerCount))
-		# test_read_bw=$(echo "     ${test_read_bw}" | grep -o '........$')
-		# test_read_iops=$((read_iops * DriverWorkerCount))
-		# test_read_iops=$(echo "     ${test_read_iops}" | grep -o '........$')
-		# echo "$obj_size, $worker_cnt, $write_bytes, $write_bandwidth, $test_write_bw,  $write_iops, $test_write_iops, $read_bytes, $read_bandwidth, $test_read_bw,  $read_iops, $test_read_iops, $write_resp_time, $read_resp_time, $write_proc_time, $read_proc_time"
-		echo "$obj_size, $worker_cnt, $write_bytes, $write_bandwidth, $write_bw,  $write_iops, $write_iops, $read_bytes, $read_bandwidth, $read_bw,  $read_iops, $read_iops, $write_resp_time, $read_resp_time, $write_proc_time, $read_proc_time"
+		test_write_bw=$(echo "$write_bandwidth * $DriverWorkerCount" | bc)
+		test_write_bw=$(echo "     ${test_write_bw}" | grep -o '..........$')
+		test_write_iops=$(echo "$write_iops * $DriverWorkerCount" | bc)
+		test_write_iops=$(echo "     ${test_write_iops}" | grep -o '........$')
+		test_read_bw=$(echo "$read_bandwidth * $DriverWorkerCount" | bc)
+		test_read_bw=$(echo "     ${test_read_bw}" | grep -o '..........$')
+		test_read_iops=$(echo "$read_iops * $DriverWorkerCount" | bc)
+		test_read_iops=$(echo "     ${test_read_iops}" | grep -o '........$')
+		echo "$obj_size, $worker_cnt, $write_bytes, $write_bandwidth, $test_write_bw,  $write_iops, $test_write_iops, $read_bytes, $read_bandwidth, $test_read_bw,  $read_iops, $test_read_iops, $write_resp_time, $read_resp_time, $write_proc_time, $read_proc_time"
 	done 
 }
 BASE_DIR="$PWD/archive"
