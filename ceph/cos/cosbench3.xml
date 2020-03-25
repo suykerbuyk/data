@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<workload name="EVANS_128K_STRIPE_SSD_W1152_OBJ8192K" description="EVANS_128K_STRIPE_SSD DriverNodeCount=3 DriverProcessCount=8 DriverProcessThreads=48 TotalWorkers=1152 OBJ_SIZE=8192K">
+  <storage type="s3" timeout="60000" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com" />
+  <workflow>
+    <workstage name="init">
+      <work type="init" workers="256" config="cprefix=s3evans;containers=r(1,1500)" />
+      <work type="init" workers="256" config="cprefix=s3evans;containers=r(1501,3000)" />
+    </workstage>
+    <workstage name="prepare">
+      <work type="prepare" division="object" workers="256" config="cprefix=s3evans;containers=r(1501,3000);objects=r(1,200);sizes=c(8192)KB" />
+    </workstage>
+    <workstage name="test_write">
+      <work name="write_lr02u31-1" driver="lr02u31-1" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(1,40);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-1" />
+      </work>
+      <work name="write_lr02u31-2" driver="lr02u31-2" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(41,80);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-2" />
+      </work>
+      <work name="write_lr02u31-3" driver="lr02u31-3" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(81,120);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-3" />
+      </work>
+      <work name="write_lr02u31-4" driver="lr02u31-4" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(121,160);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-4" />
+      </work>
+      <work name="write_lr02u31-5" driver="lr02u31-5" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(161,200);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-5" />
+      </work>
+      <work name="write_lr02u31-6" driver="lr02u31-6" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(201,240);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-6" />
+      </work>
+      <work name="write_lr02u31-7" driver="lr02u31-7" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(241,280);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-7" />
+      </work>
+      <work name="write_lr02u31-8" driver="lr02u31-8" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(281,320);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-8" />
+      </work>
+      <work name="write_lr02u32-1" driver="lr02u32-1" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(321,360);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-1" />
+      </work>
+      <work name="write_lr02u32-2" driver="lr02u32-2" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(361,400);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-2" />
+      </work>
+      <work name="write_lr02u32-3" driver="lr02u32-3" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(401,440);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-3" />
+      </work>
+      <work name="write_lr02u32-4" driver="lr02u32-4" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(441,480);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-4" />
+      </work>
+      <work name="write_lr02u32-5" driver="lr02u32-5" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(481,520);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-5" />
+      </work>
+      <work name="write_lr02u32-6" driver="lr02u32-6" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(521,560);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-6" />
+      </work>
+      <work name="write_lr02u32-7" driver="lr02u32-7" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(561,600);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-7" />
+      </work>
+      <work name="write_lr02u32-8" driver="lr02u32-8" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(601,640);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-8" />
+      </work>
+      <work name="write_lr02u33-1" driver="lr02u33-1" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(641,680);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-1" />
+      </work>
+      <work name="write_lr02u33-2" driver="lr02u33-2" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(681,720);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-2" />
+      </work>
+      <work name="write_lr02u33-3" driver="lr02u33-3" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(721,760);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-3" />
+      </work>
+      <work name="write_lr02u33-4" driver="lr02u33-4" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(761,800);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-4" />
+      </work>
+      <work name="write_lr02u33-5" driver="lr02u33-5" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(801,840);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-5" />
+      </work>
+      <work name="write_lr02u33-6" driver="lr02u33-6" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(841,880);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-6" />
+      </work>
+      <work name="write_lr02u33-7" driver="lr02u33-7" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(881,920);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-7" />
+      </work>
+      <work name="write_lr02u33-8" driver="lr02u33-8" division="object" workers="48" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3evans;containers=r(921,960);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-8" />
+      </work>
+    </workstage>
+    <workstage name="test_read">
+      <work name="read_lr02u31-1" driver="lr02u31-1" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1501,1540);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-1" />
+      </work>
+      <work name="read_lr02u31-2" driver="lr02u31-2" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1541,1580);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-2" />
+      </work>
+      <work name="read_lr02u31-3" driver="lr02u31-3" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1581,1620);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-3" />
+      </work>
+      <work name="read_lr02u31-4" driver="lr02u31-4" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1621,1660);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-4" />
+      </work>
+      <work name="read_lr02u31-5" driver="lr02u31-5" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1661,1700);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-5" />
+      </work>
+      <work name="read_lr02u31-6" driver="lr02u31-6" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1701,1740);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-6" />
+      </work>
+      <work name="read_lr02u31-7" driver="lr02u31-7" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1741,1780);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-7" />
+      </work>
+      <work name="read_lr02u31-8" driver="lr02u31-8" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1781,1820);objects=u(1,200);sizes=c(8192)KB" id="lr02u31-8" />
+      </work>
+      <work name="read_lr02u32-1" driver="lr02u32-1" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1821,1860);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-1" />
+      </work>
+      <work name="read_lr02u32-2" driver="lr02u32-2" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1861,1900);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-2" />
+      </work>
+      <work name="read_lr02u32-3" driver="lr02u32-3" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1901,1940);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-3" />
+      </work>
+      <work name="read_lr02u32-4" driver="lr02u32-4" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1941,1980);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-4" />
+      </work>
+      <work name="read_lr02u32-5" driver="lr02u32-5" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(1981,2020);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-5" />
+      </work>
+      <work name="read_lr02u32-6" driver="lr02u32-6" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2021,2060);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-6" />
+      </work>
+      <work name="read_lr02u32-7" driver="lr02u32-7" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2061,2100);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-7" />
+      </work>
+      <work name="read_lr02u32-8" driver="lr02u32-8" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2101,2140);objects=u(1,200);sizes=c(8192)KB" id="lr02u32-8" />
+      </work>
+      <work name="read_lr02u33-1" driver="lr02u33-1" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2141,2180);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-1" />
+      </work>
+      <work name="read_lr02u33-2" driver="lr02u33-2" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2181,2220);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-2" />
+      </work>
+      <work name="read_lr02u33-3" driver="lr02u33-3" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2221,2260);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-3" />
+      </work>
+      <work name="read_lr02u33-4" driver="lr02u33-4" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2261,2300);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-4" />
+      </work>
+      <work name="read_lr02u33-5" driver="lr02u33-5" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2301,2340);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-5" />
+      </work>
+      <work name="read_lr02u33-6" driver="lr02u33-6" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2341,2380);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-6" />
+      </work>
+      <work name="read_lr02u33-7" driver="lr02u33-7" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2381,2420);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-7" />
+      </work>
+      <work name="read_lr02u33-8" driver="lr02u33-8" division="object" workers="48" runtime="180">
+        <operation type="read" ratio="100" config="cprefix=s3evans;containers=r(2421,2460);objects=u(1,200);sizes=c(8192)KB" id="lr02u33-8" />
+      </work>
+    </workstage>
+    <workstage name="cleanup">
+      <work type="cleanup" workers="256" config="cprefix=s3evans;containers=r(1,1500);objects=r(1,200)" />
+      <work type="cleanup" workers="256" config="cprefix=s3evans;containers=r(1501,3000);objects=r(1,200)" />
+    </workstage>
+    <workstage name="dispose">
+      <work type="dispose" workers="256" config="cprefix=s3evans;containers=r(1,1500)" />
+      <work type="dispose" workers="256" config="cprefix=s3evans;containers=r(1501,3000)" />
+    </workstage>
+  </workflow>
+</workload>

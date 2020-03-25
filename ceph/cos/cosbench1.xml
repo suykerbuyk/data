@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<workload name="MACH2_128K_STRIPE_SSD_W408_OBJ8192K" description="EVANS_SSD_TEST_Workers=408_OBJ_SIZE=8192K">
+  <storage type="s3" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com" />
+  <workflow>
+    <workstage name="init">
+      <work type="init" workers="48" config="cprefix=s3harrier;containers=r(1,192)" />
+      <work type="init" workers="48" config="cprefix=s3harrier;containers=r(1001,1192)" />
+    </workstage>
+    <workstage name="prepare">
+      <work type="prepare" division="container" workers="48" config="cprefix=s3harrier;containers=r(1001,1192);objects=r(1,1024);sizes=c(8192)KB" />
+    </workstage>
+    <workstage name="test_write">
+      <work name="main" division="container" workers="408" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=u(1,192);objects=u(1,1024);sizes=c(8192)KB" />
+      </work>
+    </workstage>
+    <workstage name="test_read">
+      <work name="main" workers="408" runtime="180">
+        <operation type="read" division="container" ratio="100" config="cprefix=s3harrier;containers=u(1001,1192);objects=u(1,1024)" />
+      </work>
+    </workstage>
+    <workstage name="cleanup">
+      <work type="cleanup" workers="48" config="cprefix=s3harrier;containers=r(1,192);objects=r(1,1024)" />
+      <work type="cleanup" workers="48" config="cprefix=s3harrier;containers=r(1001,1192);objects=r(1,1024)" />
+    </workstage>
+    <workstage name="dispose">
+      <work type="dispose" workers="48" config="cprefix=s3harrier;containers=r(1,192)" />
+      <work type="dispose" workers="48" config="cprefix=s3harrier;containers=r(1001,1192)" />
+    </workstage>
+  </workflow>
+</workload>

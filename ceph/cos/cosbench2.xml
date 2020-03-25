@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<workload name="MACH2_128K_STRIPE_SSD_W408_OBJ8192K" description="EVANS_SSD_TEST_Workers=408_OBJ_SIZE=8192K">
+  <storage type="s3" timeout="600000" config="accesskey=12345;secretkey=67890;endpoint=http://object.lyve.colo.seagate.com" />
+  <workflow>
+    <workstage name="init">
+      <work type="init" workers="48" config="cprefix=s3harrier;containers=r(1,1000)" />
+      <work type="init" workers="48" config="cprefix=s3harrier;containers=r(1001,2000)" />
+    </workstage>
+    <workstage name="prepare">
+      <work type="prepare" division="object" workers="48" config="cprefix=s3harrier;containers=r(1001,2000);objects=r(1,100);sizes=c(64)KB" />
+    </workstage>
+    <workstage name="test_write">
+      <work name="main1" driver="lr02u31-1" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(1,40);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main2" driver="lr02u31-2" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(41,80);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main3" driver="lr02u31-3" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(81,120);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main4" driver="lr02u31-4" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(121,160);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main5" driver="lr02u31-5" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(161,200);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main6" driver="lr02u31-6" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(201,240);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main7" driver="lr02u31-7" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(241,280);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main8" driver="lr02u31-8" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(281,320);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main1" driver="lr02u32-1" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(321,360);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main2" driver="lr02u32-2" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(361,400);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main3" driver="lr02u32-3" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(401,440);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main4" driver="lr02u32-4" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(441,480);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main5" driver="lr02u32-5" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(481,520);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main6" driver="lr02u32-6" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(521,560);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main7" driver="lr02u32-7" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(561,600);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main8" driver="lr02u32-8" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(601,640);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main1" driver="lr02u33-1" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(641,680);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main2" driver="lr02u33-2" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(681,720);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main3" driver="lr02u33-3" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(721,760);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main4" driver="lr02u33-4" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(761,800);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main5" driver="lr02u33-5" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(801,840);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main6" driver="lr02u33-6" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(841,880);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main7" driver="lr02u33-7" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(881,920);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+      <work name="main8" driver="lr02u33-8" division="object" workers="20" runtime="180">
+        <operation type="write" ratio="100" config="cprefix=s3harrier;containers=r(921,960);objects=u(1,100);sizes=c(64)KB" />
+      </work>
+    </workstage>
+    <workstage name="test_read">
+      <work name="main1" driver="lr02u31-1" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1001,1040);objects=u(1,100)" />
+      </work>
+      <work name="main2" driver="lr02u31-2" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1041,1080);objects=u(1,100)" />
+      </work>
+      <work name="main3" driver="lr02u31-3" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1081,1120);objects=u(1,100)" />
+      </work>
+      <work name="main4" driver="lr02u31-4" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1121,1160);objects=u(1,100)" />
+      </work>
+      <work name="main5" driver="lr02u31-5" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1161,1200);objects=u(1,100)" />
+      </work>
+      <work name="main6" driver="lr02u31-6" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1201,1240);objects=u(1,100)" />
+      </work>
+      <work name="main7" driver="lr02u31-7" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1241,1280);objects=u(1,100)" />
+      </work>
+      <work name="main8" driver="lr02u31-8" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1281,1320);objects=u(1,100)" />
+      </work>
+      <work name="main1" driver="lr02u32-1" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1321,1360);objects=u(1,100)" />
+      </work>
+      <work name="main2" driver="lr02u32-2" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1361,1400);objects=u(1,100)" />
+      </work>
+      <work name="main3" driver="lr02u32-3" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1401,1440);objects=u(1,100)" />
+      </work>
+      <work name="main4" driver="lr02u32-4" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1441,1480);objects=u(1,100)" />
+      </work>
+      <work name="main5" driver="lr02u32-5" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1481,1520);objects=u(1,100)" />
+      </work>
+      <work name="main6" driver="lr02u32-6" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1521,1560);objects=u(1,100)" />
+      </work>
+      <work name="main7" driver="lr02u32-7" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1561,1600);objects=u(1,100)" />
+      </work>
+      <work name="main8" driver="lr02u32-8" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1601,1640);objects=u(1,100)" />
+      </work>
+      <work name="main1" driver="lr02u33-1" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1641,1680);objects=u(1,100)" />
+      </work>
+      <work name="main2" driver="lr02u33-2" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1681,1720);objects=u(1,100)" />
+      </work>
+      <work name="main3" driver="lr02u33-3" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1721,1760);objects=u(1,100)" />
+      </work>
+      <work name="main4" driver="lr02u33-4" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1761,1800);objects=u(1,100)" />
+      </work>
+      <work name="main5" driver="lr02u33-5" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1801,1840);objects=u(1,100)" />
+      </work>
+      <work name="main6" driver="lr02u33-6" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1841,1880);objects=u(1,100)" />
+      </work>
+      <work name="main7" driver="lr02u33-7" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1881,1920);objects=u(1,100)" />
+      </work>
+      <work name="main8" driver="lr02u33-8" workers="20" runtime="180">
+        <operation type="read" division="none" ratio="100" config="cprefix=s3harrier;containers=u(1921,1960);objects=u(1,100)" />
+      </work>
+    </workstage>
+    <workstage name="cleanup">
+      <work type="cleanup" workers="48" config="cprefix=s3harrier;containers=r(1,1000);objects=r(1,100)" />
+      <work type="cleanup" workers="48" config="cprefix=s3harrier;containers=r(1001,2000);objects=r(1,100)" />
+    </workstage>
+    <workstage name="dispose">
+      <work type="dispose" workers="48" config="cprefix=s3harrier;containers=r(1,1000)" />
+      <work type="dispose" workers="48" config="cprefix=s3harrier;containers=r(1001,2000)" />
+    </workstage>
+  </workflow>
+</workload>
