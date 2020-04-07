@@ -1,0 +1,31 @@
+NAME   USED  AVAIL     REFER  MOUNTPOINT
+tank  64.2G  71.6T     64.0G  /tank
+  pool: tank
+ state: ONLINE
+status: Some supported features are not enabled on the pool. The pool can
+	still be used, but some features are unavailable.
+action: Enable all features using 'zpool upgrade'. Once this is done,
+	the pool may no longer be accessible by software that does not support
+	the features. See zpool-features(5) for details.
+  scan: none requested
+config:
+
+	NAME                        STATE     READ WRITE CKSUM
+	tank                        ONLINE       0     0     0
+	  raidz2-0                  ONLINE       0     0     0
+	    wwn-0x5000c500ae27ae17  ONLINE       0     0     0
+	    wwn-0x5000c500ae29a2ef  ONLINE       0     0     0
+	    wwn-0x5000c500ae2c702b  ONLINE       0     0     0
+	    wwn-0x5000c500ae30dff3  ONLINE       0     0     0
+	  raidz2-1                  ONLINE       0     0     0
+	    wwn-0x5000c500ae32df5b  ONLINE       0     0     0
+	    wwn-0x5000c500ae5c9e03  ONLINE       0     0     0
+	    wwn-0x5000c500ae632a83  ONLINE       0     0     0
+	    wwn-0x5000c500ae6638d3  ONLINE       0     0     0
+	  raidz2-2                  ONLINE       0     0     0
+	    wwn-0x5000c500ae6878e3  ONLINE       0     0     0
+	    wwn-0x5000c500ae7ec25b  ONLINE       0     0     0
+	    wwn-0x5000c500ae7ec3bf  ONLINE       0     0     0
+	    wwn-0x5000c500ae9ef1ff  ONLINE       0     0     0
+
+errors: No known data errors

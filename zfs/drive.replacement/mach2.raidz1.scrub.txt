@@ -1,0 +1,46 @@
+NAME   USED  AVAIL     REFER  MOUNTPOINT
+tank  28.2T  79.3T     28.2T  /tank
+  pool: tank
+ state: ONLINE
+status: Some supported features are not enabled on the pool. The pool can
+	still be used, but some features are unavailable.
+action: Enable all features using 'zpool upgrade'. Once this is done,
+	the pool may no longer be accessible by software that does not support
+	the features. See zpool-features(5) for details.
+  scan: scrub repaired 0B in 0 days 06:15:11 with 0 errors on Fri Apr  3 12:07:44 2020
+config:
+
+	NAME                                        STATE     READ WRITE CKSUM
+	tank                                        ONLINE       0     0     0
+	  raidz1-0                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae178ae70000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2eff9f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2f00bf0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33a4b30000000000000000  ONLINE       0     0     0
+	  raidz1-1                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33b91f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33d20f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35b3030000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35ff4b0000000000000000  ONLINE       0     0     0
+	  raidz1-2                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae38ae830000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a270000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2d8f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2ef30000000000000000  ONLINE       0     0     0
+	  raidz1-3                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae178ae70001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2eff9f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2f00bf0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33a4b30001000000000000  ONLINE       0     0     0
+	  raidz1-4                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33b91f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33d20f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35b3030001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35ff4b0001000000000000  ONLINE       0     0     0
+	  raidz1-5                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae38ae830001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a270001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2d8f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2ef30001000000000000  ONLINE       0     0     0
+
+errors: No known data errors

@@ -1,0 +1,183 @@
+./filldisk.sh 
+zpool export tank
+zpool labelclear -f wwn-0x6000c500ae33c2430001000000000000
+zpool labelclear -f wwn-0x6000c500ae33c2430000000000000000
+parted /dev/disk/by-id/wwn-0x6000c500ae33c2430001000000000000 rm 9 rm 1
+parted /dev/disk/by-id/wwn-0x6000c500ae33c2430000000000000000 rm 9 rm 1
+dd if=/dev/zero of=/dev/disk/by-id/wwn-0x6000c500ae33c2430001000000000000 bs=1M count=1024 oflag=sync &
+dd if=/dev/zero of=/dev/disk/by-id/wwn-0x6000c500ae33c2430000000000000000 bs=1M count=1024 oflag=sync &
+parted /dev/disk/by-id/wwn-0x6000c500ae33c2430001000000000000 mklabel GPT
+parted /dev/disk/by-id/wwn-0x6000c500ae33c2430000000000000000 mklabel GPT
+zpool import tank
+zpool status
+zpool offline tank 5839199682737309430
+zpool offline tank 1892079833624053989
+zpool replace tank wwn-0x6000c500ae33c2430001000000000000 wwn-0x6000c500ae33c2430001000000000000
+zpool replace tank wwn-0x6000c500ae33c2430000000000000000 wwn-0x6000c500ae33c2430000000000000000
+zpool status
+
+zpool status
+  pool: tank
+ state: DEGRADED
+status: One or more devices is currently being resilvered.  The pool will
+	continue to function, possibly in a degraded state.
+action: Wait for the resilver to complete.
+  scan: resilver in progress since Sat Apr  4 19:16:13 2020
+	28.2T scanned at 81.9G/s, 23.6T issued at 68.6G/s, 28.2T total
+	583M resilvered, 83.74% done, 0 days 00:01:08 to go
+config:
+
+	NAME                                          STATE     READ WRITE CKSUM
+	tank                                          DEGRADED     0     0     0
+	  mirror-0                                    DEGRADED     0     0     0
+	    replacing-0                               DEGRADED     0     0     0
+	      1892079833624053989                     OFFLINE      0     0     0  was /dev/disk/by-id/wwn-0x6000c500ae33c2430000000000000000-part1/old
+	      wwn-0x6000c500ae33c2430000000000000000  ONLINE       0     0     0  (resilvering)
+	    wwn-0x6000c500ae3581ef0000000000000000    ONLINE       0     0     0
+	  mirror-1                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae3597a30000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae359ccf0000000000000000    ONLINE       0     0     0
+	  mirror-2                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae35cca70000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae35dcff0000000000000000    ONLINE       0     0     0
+	  mirror-3                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae35dd970000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae35feeb0000000000000000    ONLINE       0     0     0
+	  mirror-4                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae36011b0000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae3609170000000000000000    ONLINE       0     0     0
+	  mirror-5                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a8b0000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2dff0000000000000000    ONLINE       0     0     0
+	  mirror-6                                    DEGRADED     0     0     0
+	    replacing-0                               DEGRADED     0     0     0
+	      5839199682737309430                     OFFLINE      0     0     0  was /dev/disk/by-id/wwn-0x6000c500ae33c2430001000000000000-part1/old
+	      wwn-0x6000c500ae33c2430001000000000000  ONLINE       0     0     0  (resilvering)
+	    wwn-0x6000c500ae3581ef0001000000000000    ONLINE       0     0     0
+	  mirror-7                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae3597a30001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae359ccf0001000000000000    ONLINE       0     0     0
+	  mirror-8                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae35cca70001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae35dcff0001000000000000    ONLINE       0     0     0
+	  mirror-9                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae35dd970001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae35feeb0001000000000000    ONLINE       0     0     0
+	  mirror-10                                   ONLINE       0     0     0
+	    wwn-0x6000c500ae36011b0001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae3609170001000000000000    ONLINE       0     0     0
+	  mirror-11                                   ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a8b0001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2dff0001000000000000    ONLINE       0     0     0
+
+errors: No known data errors
+  pool: tank
+ state: DEGRADED
+status: One or more devices is currently being resilvered.  The pool will
+	continue to function, possibly in a degraded state.
+action: Wait for the resilver to complete.
+  scan: resilver in progress since Sat Apr  4 19:16:13 2020
+	28.2T scanned at 77.3G/s, 23.6T issued at 64.7G/s, 28.2T total
+	656M resilvered, 83.74% done, 0 days 00:01:12 to go
+
+errors: No known data errors
+  pool: tank
+ state: ONLINE
+status: Some supported features are not enabled on the pool. The pool can
+	still be used, but some features are unavailable.
+action: Enable all features using 'zpool upgrade'. Once this is done,
+	the pool may no longer be accessible by software that does not support
+	the features. See zpool-features(5) for details.
+  scan: resilvered 2.39T in 0 days 04:31:58 with 0 errors on Sun Apr  5 04:38:29 2020
+config:
+
+	NAME                                        STATE     READ WRITE CKSUM
+	tank                                        ONLINE       0     0     0
+	  mirror-0                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33c2430000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae3581ef0000000000000000  ONLINE       0     0     0
+	  mirror-1                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae3597a30000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae359ccf0000000000000000  ONLINE       0     0     0
+	  mirror-2                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae35cca70000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35dcff0000000000000000  ONLINE       0     0     0
+	  mirror-3                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae35dd970000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35feeb0000000000000000  ONLINE       0     0     0
+	  mirror-4                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae36011b0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae3609170000000000000000  ONLINE       0     0     0
+	  mirror-5                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a8b0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2dff0000000000000000  ONLINE       0     0     0
+	  mirror-6                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33c2430001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae3581ef0001000000000000  ONLINE       0     0     0
+	  mirror-7                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae3597a30001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae359ccf0001000000000000  ONLINE       0     0     0
+	  mirror-8                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae35cca70001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35dcff0001000000000000  ONLINE       0     0     0
+	  mirror-9                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae35dd970001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35feeb0001000000000000  ONLINE       0     0     0
+	  mirror-10                                 ONLINE       0     0     0
+	    wwn-0x6000c500ae36011b0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae3609170001000000000000  ONLINE       0     0     0
+	  mirror-11                                 ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a8b0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2dff0001000000000000  ONLINE       0     0     0
+
+errors: No known data errors
+  pool: tank
+ state: ONLINE
+status: Some supported features are not enabled on the pool. The pool can
+	still be used, but some features are unavailable.
+action: Enable all features using 'zpool upgrade'. Once this is done,
+	the pool may no longer be accessible by software that does not support
+	the features. See zpool-features(5) for details.
+  scan: scrub repaired 0B in 0 days 05:35:05 with 0 errors on Sun Apr  5 14:37:23 2020
+config:
+
+	NAME                                        STATE     READ WRITE CKSUM
+	tank                                        ONLINE       0     0     0
+	  mirror-0                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33c2430000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae3581ef0000000000000000  ONLINE       0     0     0
+	  mirror-1                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae3597a30000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae359ccf0000000000000000  ONLINE       0     0     0
+	  mirror-2                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae35cca70000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35dcff0000000000000000  ONLINE       0     0     0
+	  mirror-3                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae35dd970000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35feeb0000000000000000  ONLINE       0     0     0
+	  mirror-4                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae36011b0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae3609170000000000000000  ONLINE       0     0     0
+	  mirror-5                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a8b0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2dff0000000000000000  ONLINE       0     0     0
+	  mirror-6                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33c2430001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae3581ef0001000000000000  ONLINE       0     0     0
+	  mirror-7                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae3597a30001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae359ccf0001000000000000  ONLINE       0     0     0
+	  mirror-8                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae35cca70001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35dcff0001000000000000  ONLINE       0     0     0
+	  mirror-9                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae35dd970001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35feeb0001000000000000  ONLINE       0     0     0
+	  mirror-10                                 ONLINE       0     0     0
+	    wwn-0x6000c500ae36011b0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae3609170001000000000000  ONLINE       0     0     0
+	  mirror-11                                 ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a8b0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2dff0001000000000000  ONLINE       0     0     0
+
+errors: No known data errors

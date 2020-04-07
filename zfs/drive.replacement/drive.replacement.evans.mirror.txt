@@ -1,0 +1,111 @@
+zpool export tank
+zpool labelclear -f wwn-0x5000c500ae27ae17
+parted /dev/disk/by-id/wwn-0x5000c500ae27ae17 rm 9 rm 1
+dd if=/dev/zero of=/dev/disk/by-id/wwn-0x5000c500ae27ae17 bs=1M count=1024 oflag=sync
+parted /dev/disk/by-id/wwn-0x5000c500ae27ae17 mklabel GPT
+zpool import tank
+zpool status
+zpool offline tank 8799325834663852019
+zpool replace tank wwn-0x5000c500ae27ae17 wwn-0x5000c500ae27ae17
+
+zpool status
+NAME   USED  AVAIL     REFER  MOUNTPOINT
+tank  28.2T  45.7T     28.2T  /tank
+  pool: tank
+ state: DEGRADED
+status: One or more devices is currently being resilvered.  The pool will
+	continue to function, possibly in a degraded state.
+action: Wait for the resilver to complete.
+  scan: resilver in progress since Sat Apr  4 22:47:06 2020
+	3.47T scanned at 82.5G/s, 2.89T issued at 68.8G/s, 28.2T total
+	0B resilvered, 10.23% done, 0 days 00:06:17 to go
+config:
+
+	NAME                          STATE     READ WRITE CKSUM
+	tank                          DEGRADED     0     0     0
+	  mirror-0                    DEGRADED     0     0     0
+	    replacing-0               DEGRADED     0     0     0
+	      8799325834663852019     OFFLINE      0     0     0  was /dev/disk/by-id/wwn-0x5000c500ae27ae17-part1/old
+	      wwn-0x5000c500ae27ae17  ONLINE       0     0     0
+	    wwn-0x5000c500ae29a2ef    ONLINE       0     0     0
+	  mirror-1                    ONLINE       0     0     0
+	    wwn-0x5000c500ae2c702b    ONLINE       0     0     0
+	    wwn-0x5000c500ae30dff3    ONLINE       0     0     0
+	  mirror-2                    ONLINE       0     0     0
+	    wwn-0x5000c500ae32df5b    ONLINE       0     0     0
+	    wwn-0x5000c500ae5c9e03    ONLINE       0     0     0
+	  mirror-3                    ONLINE       0     0     0
+	    wwn-0x5000c500ae632a83    ONLINE       0     0     0
+	    wwn-0x5000c500ae6638d3    ONLINE       0     0     0
+	  mirror-4                    ONLINE       0     0     0
+	    wwn-0x5000c500ae6878e3    ONLINE       0     0     0
+	    wwn-0x5000c500ae7ec25b    ONLINE       0     0     0
+	  mirror-5                    ONLINE       0     0     0
+	    wwn-0x5000c500ae7ec3bf    ONLINE       0     0     0
+	    wwn-0x5000c500ae9ef1ff    ONLINE       0     0     0
+
+errors: No known data errors
+  pool: tank
+ state: ONLINE
+status: Some supported features are not enabled on the pool. The pool can
+	still be used, but some features are unavailable.
+action: Enable all features using 'zpool upgrade'. Once this is done,
+	the pool may no longer be accessible by software that does not support
+	the features. See zpool-features(5) for details.
+  scan: resilvered 4.70T in 0 days 09:19:16 with 0 errors on Sun Apr  5 08:06:22 2020
+config:
+
+	NAME                        STATE     READ WRITE CKSUM
+	tank                        ONLINE       0     0     0
+	  mirror-0                  ONLINE       0     0     0
+	    wwn-0x5000c500ae27ae17  ONLINE       0     0     0
+	    wwn-0x5000c500ae29a2ef  ONLINE       0     0     0
+	  mirror-1                  ONLINE       0     0     0
+	    wwn-0x5000c500ae2c702b  ONLINE       0     0     0
+	    wwn-0x5000c500ae30dff3  ONLINE       0     0     0
+	  mirror-2                  ONLINE       0     0     0
+	    wwn-0x5000c500ae32df5b  ONLINE       0     0     0
+	    wwn-0x5000c500ae5c9e03  ONLINE       0     0     0
+	  mirror-3                  ONLINE       0     0     0
+	    wwn-0x5000c500ae632a83  ONLINE       0     0     0
+	    wwn-0x5000c500ae6638d3  ONLINE       0     0     0
+	  mirror-4                  ONLINE       0     0     0
+	    wwn-0x5000c500ae6878e3  ONLINE       0     0     0
+	    wwn-0x5000c500ae7ec25b  ONLINE       0     0     0
+	  mirror-5                  ONLINE       0     0     0
+	    wwn-0x5000c500ae7ec3bf  ONLINE       0     0     0
+	    wwn-0x5000c500ae9ef1ff  ONLINE       0     0     0
+
+errors: No known data errors
+  pool: tank
+ state: ONLINE
+status: Some supported features are not enabled on the pool. The pool can
+	still be used, but some features are unavailable.
+action: Enable all features using 'zpool upgrade'. Once this is done,
+	the pool may no longer be accessible by software that does not support
+	the features. See zpool-features(5) for details.
+  scan: scrub repaired 0B in 0 days 09:04:12 with 0 errors on Sun Apr  5 18:06:14 2020
+config:
+
+	NAME                        STATE     READ WRITE CKSUM
+	tank                        ONLINE       0     0     0
+	  mirror-0                  ONLINE       0     0     0
+	    wwn-0x5000c500ae27ae17  ONLINE       0     0     0
+	    wwn-0x5000c500ae29a2ef  ONLINE       0     0     0
+	  mirror-1                  ONLINE       0     0     0
+	    wwn-0x5000c500ae2c702b  ONLINE       0     0     0
+	    wwn-0x5000c500ae30dff3  ONLINE       0     0     0
+	  mirror-2                  ONLINE       0     0     0
+	    wwn-0x5000c500ae32df5b  ONLINE       0     0     0
+	    wwn-0x5000c500ae5c9e03  ONLINE       0     0     0
+	  mirror-3                  ONLINE       0     0     0
+	    wwn-0x5000c500ae632a83  ONLINE       0     0     0
+	    wwn-0x5000c500ae6638d3  ONLINE       0     0     0
+	  mirror-4                  ONLINE       0     0     0
+	    wwn-0x5000c500ae6878e3  ONLINE       0     0     0
+	    wwn-0x5000c500ae7ec25b  ONLINE       0     0     0
+	  mirror-5                  ONLINE       0     0     0
+	    wwn-0x5000c500ae7ec3bf  ONLINE       0     0     0
+	    wwn-0x5000c500ae9ef1ff  ONLINE       0     0     0
+
+errors: No known data errors

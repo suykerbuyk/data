@@ -1,0 +1,164 @@
+  zpool status
+  zpool status
+  zpool export tank
+  zpool labelclear -f wwn-0x6000c500ae178ae70001000000000000
+  zpool labelclear -f wwn-0x6000c500ae178ae70000000000000000
+  parted /dev/disk/by-id/wwn-0x6000c500ae178ae70001000000000000 rm 9 rm 1
+  parted /dev/disk/by-id/wwn-0x6000c500ae178ae70000000000000000 rm 9 rm 1
+  dd if=/dev/zero of=/dev/disk/by-id/wwn-0x6000c500ae178ae70001000000000000 bs=1M count=1024 oflag=sync &
+  dd if=/dev/zero of=/dev/disk/by-id/wwn-0x6000c500ae178ae70000000000000000 bs=1M count=1024 oflag=sync &
+  parted /dev/disk/by-id/wwn-0x6000c500ae178ae70001000000000000 mklabel GPT
+  parted /dev/disk/by-id/wwn-0x6000c500ae178ae70000000000000000 mklabel GPT
+  zpool import tank
+  zpool replace tank wwn-0x6000c500ae178ae70001000000000000 wwn-0x6000c500ae178ae70001000000000000
+  zpool replace tank wwn-0x6000c500ae178ae70000000000000000 wwn-0x6000c500ae178ae70000000000000000
+
+  zpool status
+  pool: tank
+ state: DEGRADED
+status: One or more devices is currently being resilvered.  The pool will
+	continue to function, possibly in a degraded state.
+action: Wait for the resilver to complete.
+  scan: resilver in progress since Sat Apr  4 19:09:50 2020
+	38.8T scanned at 55.6G/s, 26.2T issued at 37.5G/s, 38.8T total
+	8.67G resilvered, 67.43% done, 0 days 00:05:45 to go
+config:
+
+	NAME                                          STATE     READ WRITE CKSUM
+	tank                                          DEGRADED     0     0     0
+	  raidz1-0                                    DEGRADED     0     0     0
+	    replacing-0                               DEGRADED     0     0     0
+	      15529320900325436240                    OFFLINE      0     0     0  was /dev/disk/by-id/wwn-0x6000c500ae178ae70000000000000000-part1/old
+	      wwn-0x6000c500ae178ae70000000000000000  ONLINE       0     0     0  (resilvering)
+	    wwn-0x6000c500ae2eff9f0000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae2f00bf0000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae33a4b30000000000000000    ONLINE       0     0     0
+	  raidz1-1                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae33b91f0000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae33d20f0000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae35b3030000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae35ff4b0000000000000000    ONLINE       0     0     0
+	  raidz1-2                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae38ae830000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a270000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2d8f0000000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2ef30000000000000000    ONLINE       0     0     0
+	  raidz1-3                                    DEGRADED     0     0     0
+	    replacing-0                               DEGRADED     0     0     0
+	      13627303059212643953                    OFFLINE      0     0     0  was /dev/disk/by-id/wwn-0x6000c500ae178ae70001000000000000-part1/old
+	      wwn-0x6000c500ae178ae70001000000000000  ONLINE       0     0     0  (resilvering)
+	    wwn-0x6000c500ae2eff9f0001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae2f00bf0001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae33a4b30001000000000000    ONLINE       0     0     0
+	  raidz1-4                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae33b91f0001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae33d20f0001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae35b3030001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae35ff4b0001000000000000    ONLINE       0     0     0
+	  raidz1-5                                    ONLINE       0     0     0
+	    wwn-0x6000c500ae38ae830001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a270001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2d8f0001000000000000    ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2ef30001000000000000    ONLINE       0     0     0
+
+zpool status
+errors: No known data errors
+  pool: tank
+ state: DEGRADED
+status: One or more devices is currently being resilvered.  The pool will
+	continue to function, possibly in a degraded state.
+action: Wait for the resilver to complete.
+  scan: resilver in progress since Sat Apr  4 19:09:50 2020
+	38.8T scanned at 50.5G/s, 26.2T issued at 34.1G/s, 38.8T total
+	23.2G resilvered, 67.57% done, 0 days 00:06:17 to go
+
+zpool status
+errors: No known data errors
+  pool: tank
+ state: ONLINE
+status: Some supported features are not enabled on the pool. The pool can
+	still be used, but some features are unavailable.
+action: Enable all features using 'zpool upgrade'. Once this is done,
+	the pool may no longer be accessible by software that does not support
+	the features. See zpool-features(5) for details.
+  scan: resilvered 1.62T in 0 days 03:23:20 with 0 errors on Sun Apr  5 05:01:04 2020
+config:
+
+	NAME                                        STATE     READ WRITE CKSUM
+	tank                                        ONLINE       0     0     0
+	  raidz1-0                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae178ae70000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2eff9f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2f00bf0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33a4b30000000000000000  ONLINE       0     0     0
+	  raidz1-1                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33b91f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33d20f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35b3030000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35ff4b0000000000000000  ONLINE       0     0     0
+	  raidz1-2                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae38ae830000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a270000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2d8f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2ef30000000000000000  ONLINE       0     0     0
+	  raidz1-3                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae178ae70001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2eff9f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2f00bf0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33a4b30001000000000000  ONLINE       0     0     0
+	  raidz1-4                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33b91f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33d20f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35b3030001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35ff4b0001000000000000  ONLINE       0     0     0
+	  raidz1-5                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae38ae830001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a270001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2d8f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2ef30001000000000000  ONLINE       0     0     0
+
+errors: No known data errors
+  pool: tank
+ state: ONLINE
+status: Some supported features are not enabled on the pool. The pool can
+	still be used, but some features are unavailable.
+action: Enable all features using 'zpool upgrade'. Once this is done,
+	the pool may no longer be accessible by software that does not support
+	the features. See zpool-features(5) for details.
+  scan: scrub repaired 0B in 0 days 06:12:24 with 0 errors on Sun Apr  5 15:14:35 2020
+config:
+
+	NAME                                        STATE     READ WRITE CKSUM
+	tank                                        ONLINE       0     0     0
+	  raidz1-0                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae178ae70000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2eff9f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2f00bf0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33a4b30000000000000000  ONLINE       0     0     0
+	  raidz1-1                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33b91f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33d20f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35b3030000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35ff4b0000000000000000  ONLINE       0     0     0
+	  raidz1-2                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae38ae830000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a270000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2d8f0000000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2ef30000000000000000  ONLINE       0     0     0
+	  raidz1-3                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae178ae70001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2eff9f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae2f00bf0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33a4b30001000000000000  ONLINE       0     0     0
+	  raidz1-4                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae33b91f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae33d20f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35b3030001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae35ff4b0001000000000000  ONLINE       0     0     0
+	  raidz1-5                                  ONLINE       0     0     0
+	    wwn-0x6000c500ae38ae830001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2a270001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2d8f0001000000000000  ONLINE       0     0     0
+	    wwn-0x6000c500ae6b2ef30001000000000000  ONLINE       0     0     0
+
+errors: No known data errors
