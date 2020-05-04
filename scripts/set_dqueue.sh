@@ -38,7 +38,7 @@ find_drv_count() {
 	find $DSK_PATH -name "$1*" | grep -v part | cut -c 1-38 | sort -u| wc -l
 }
 find_lun_count() {
-	find $DSK_PATH -name "$1*" | grep -v part | cut -c 1-38 --complement | sort -u | wc -l
+	find $DSK_PATH -name "$1*" | grep -v part |cut -c 1-38 --complement | sort -u | wc -l
 }
 find_vg_count() {
 	lvs | grep ${LVM_VG_PREFIX} | wc -l
