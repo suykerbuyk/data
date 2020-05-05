@@ -1,9 +1,11 @@
 #!/bin/sh
 
 
-DIRS=" mach.2/deadline_scheduler_4k_read_ahead/8kChunk \
-       mach.2/deadline_scheduler_4k_read_ahead/128kChunk\
-       evans/deadline_scheduler_4k_read_ahead"
+DIRS=" evans/deadline_scheduler_4k_read_ahead \
+mach.2/deadline_scheduler_4k_read_ahead/128kChunk \
+mach.2/deadline_scheduler_4k_read_ahead/8kChunk \
+mach.2/deadline_scheduler_4k_read_ahead/32kChunk \
+mach.2/deadline_scheduler_4k_read_ahead/4kChunk"
 
 for DIR in $DIRS
 do
