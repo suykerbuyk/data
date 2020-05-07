@@ -2,21 +2,15 @@
 # vim:ff=unix noati:ts=4:ss=4
 #!/bin/sh
 
-
-# Mach2 Harrier 14TB
-DSK_PREFIX='wwn-0x6000c500a'
-
-# Evans Drives 14TB
-DSK_PREFIX='wwn-0x5000c500a'
-
-# ST14000 10TB disks
-#DSK_PREFIX='wwn-0x5000c5009'
+MACH2='wwn-0x6000c500a'
+EVANS='wwn-0x5000c500a'
+TATSU='wwn-0x5000c5009'
 
 enclosure_sg=$(lsscsi -g \
    | grep enclos | grep SEAGATE \
    | awk '{ print $7 }' | tail -1)
 map_disk_slots() { 
-   for dev in $(ls /dev/disk/by-id/ | grep "$DSK_PREFIX" | grep -v part) 
+   for dev in $(ls /dev/disk/by-id/ | grep "$1" | grep -v part) 
    do
        d="/dev/disk/by-id/$dev"
        this_sn=$(sg_vpd --page=0x80 $d \
@@ -32,8 +26,12 @@ map_disk_slots() {
            | sed 's/^.*device slot number: //g')
        device_slot=$(printf "%03d" $device_slot)
        kdev=$(readlink -f $d)
-       echo "slot=$device_slot $dev sas_addr=$sas_address s/n=$this_sn $kdev"
+       echo "  slot=$device_slot $dev sas_addr=$sas_address s/n=$this_sn $kdev"
    done
 }
-
-map_disk_slots | sort
+for DSK_TYPE in MACH2 EVANS TATSU
+do
+	DSK_PREFIX="${!DSK_TYPE}"
+	echo "$DSK_TYPE ($DSK_PREFIX):"
+	map_disk_slots "${DSK_PREFIX}"
+done
