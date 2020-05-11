@@ -1,0 +1,208 @@
+Have lsscsi
+Have lvs
+Have pvs
+Have sg_vpd
+Have sg_ses
+Have sg_inq
+Building Disk Maps...
+  MACH2 (wwn-0x6000c500a):
+  EVANS (wwn-0x5000c500a):
+  TATSU (wwn-0x5000c5009):
+Detected 12 Evans drives
+Detected 0 Mach2 drives
+Detected  Nytro drives
+Detected  Total Drives
+Detected  Existing Volume Groups
+Purging volume groups
+PVS=/dev/sdc 
+    vgremove -y sgt_vg_data_000 
+  Logical volume "EVANS_data_000" successfully removed
+  Volume group "sgt_vg_data_000" successfully removed
+    pvremove -y /dev/sdc  
+  Labels on physical volume "/dev/sdc" successfully wiped.
+PVS=/dev/sdd 
+    vgremove -y sgt_vg_data_001 
+  Logical volume "EVANS_data_001" successfully removed
+  Volume group "sgt_vg_data_001" successfully removed
+    pvremove -y /dev/sdd  
+  Labels on physical volume "/dev/sdd" successfully wiped.
+PVS=/dev/sdg 
+    vgremove -y sgt_vg_data_002 
+  Logical volume "EVANS_data_002" successfully removed
+  Volume group "sgt_vg_data_002" successfully removed
+    pvremove -y /dev/sdg  
+  Labels on physical volume "/dev/sdg" successfully wiped.
+PVS=/dev/sdh 
+    vgremove -y sgt_vg_data_003 
+  Logical volume "EVANS_data_003" successfully removed
+  Volume group "sgt_vg_data_003" successfully removed
+    pvremove -y /dev/sdh  
+  Labels on physical volume "/dev/sdh" successfully wiped.
+PVS=/dev/sdj 
+    vgremove -y sgt_vg_data_004 
+  Logical volume "EVANS_data_004" successfully removed
+  Volume group "sgt_vg_data_004" successfully removed
+    pvremove -y /dev/sdj  
+  Labels on physical volume "/dev/sdj" successfully wiped.
+PVS=/dev/sdk 
+    vgremove -y sgt_vg_data_005 
+  Logical volume "EVANS_data_005" successfully removed
+  Volume group "sgt_vg_data_005" successfully removed
+    pvremove -y /dev/sdk  
+  Labels on physical volume "/dev/sdk" successfully wiped.
+PVS=/dev/sdl 
+    vgremove -y sgt_vg_data_006 
+  Logical volume "EVANS_data_006" successfully removed
+  Volume group "sgt_vg_data_006" successfully removed
+    pvremove -y /dev/sdl  
+  Labels on physical volume "/dev/sdl" successfully wiped.
+PVS=/dev/sdm 
+    vgremove -y sgt_vg_data_007 
+  Logical volume "EVANS_data_007" successfully removed
+  Volume group "sgt_vg_data_007" successfully removed
+    pvremove -y /dev/sdm  
+  Labels on physical volume "/dev/sdm" successfully wiped.
+PVS=/dev/sdn 
+    vgremove -y sgt_vg_data_008 
+  Logical volume "EVANS_data_008" successfully removed
+  Volume group "sgt_vg_data_008" successfully removed
+    pvremove -y /dev/sdn  
+  Labels on physical volume "/dev/sdn" successfully wiped.
+PVS=/dev/sdo 
+    vgremove -y sgt_vg_data_009 
+  Logical volume "EVANS_data_009" successfully removed
+  Volume group "sgt_vg_data_009" successfully removed
+    pvremove -y /dev/sdo  
+  Labels on physical volume "/dev/sdo" successfully wiped.
+PVS=/dev/sdp 
+    vgremove -y sgt_vg_data_010 
+  Logical volume "EVANS_data_010" successfully removed
+  Volume group "sgt_vg_data_010" successfully removed
+    pvremove -y /dev/sdp  
+  Labels on physical volume "/dev/sdp" successfully wiped.
+PVS=/dev/sdq 
+    vgremove -y sgt_vg_data_011 
+  Logical volume "EVANS_data_011" successfully removed
+  Volume group "sgt_vg_data_011" successfully removed
+    pvremove -y /dev/sdq  
+  Labels on physical volume "/dev/sdq" successfully wiped.
+ echo 'deadline' >/sys/block/sdc/queue/scheduler 
+ echo '4096' >/sys/block/sdc/queue/read_ahead_kb 
+ wipefs -a /dev/sdc 
+Making disk LVM on slot 000 DSK:/dev/disk/by-id/wwn-0x5000c500ae9ef1ff
+     vgcreate sgt_vg_data_000 /dev/disk/by-id/wwn-0x5000c500ae9ef1ff 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae9ef1ff" successfully created.
+  Volume group "sgt_vg_data_000" successfully created
+     lvcreate -y -n EVANS_data_000 -l 1000.000000REE sgt_vg_data_000 
+  Logical volume "EVANS_data_000" created.
+ echo 'deadline' >/sys/block/sdd/queue/scheduler 
+ echo '4096' >/sys/block/sdd/queue/read_ahead_kb 
+ wipefs -a /dev/sdd 
+Making disk LVM on slot 001 DSK:/dev/disk/by-id/wwn-0x5000c500ae5c9e03
+     vgcreate sgt_vg_data_001 /dev/disk/by-id/wwn-0x5000c500ae5c9e03 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae5c9e03" successfully created.
+  Volume group "sgt_vg_data_001" successfully created
+     lvcreate -y -n EVANS_data_001 -l 1000.000000REE sgt_vg_data_001 
+  Logical volume "EVANS_data_001" created.
+ echo 'deadline' >/sys/block/sdg/queue/scheduler 
+ echo '4096' >/sys/block/sdg/queue/read_ahead_kb 
+ wipefs -a /dev/sdg 
+Making disk LVM on slot 002 DSK:/dev/disk/by-id/wwn-0x5000c500ae7ec25b
+     vgcreate sgt_vg_data_002 /dev/disk/by-id/wwn-0x5000c500ae7ec25b 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae7ec25b" successfully created.
+  Volume group "sgt_vg_data_002" successfully created
+     lvcreate -y -n EVANS_data_002 -l 1000.000000REE sgt_vg_data_002 
+  Logical volume "EVANS_data_002" created.
+ echo 'deadline' >/sys/block/sdh/queue/scheduler 
+ echo '4096' >/sys/block/sdh/queue/read_ahead_kb 
+ wipefs -a /dev/sdh 
+Making disk LVM on slot 003 DSK:/dev/disk/by-id/wwn-0x5000c500ae6878e3
+     vgcreate sgt_vg_data_003 /dev/disk/by-id/wwn-0x5000c500ae6878e3 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae6878e3" successfully created.
+  Volume group "sgt_vg_data_003" successfully created
+     lvcreate -y -n EVANS_data_003 -l 1000.000000REE sgt_vg_data_003 
+  Logical volume "EVANS_data_003" created.
+ echo 'deadline' >/sys/block/sdj/queue/scheduler 
+ echo '4096' >/sys/block/sdj/queue/read_ahead_kb 
+ wipefs -a /dev/sdj 
+Making disk LVM on slot 004 DSK:/dev/disk/by-id/wwn-0x5000c500ae2c702b
+     vgcreate sgt_vg_data_004 /dev/disk/by-id/wwn-0x5000c500ae2c702b 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae2c702b" successfully created.
+  Volume group "sgt_vg_data_004" successfully created
+     lvcreate -y -n EVANS_data_004 -l 1000.000000REE sgt_vg_data_004 
+  Logical volume "EVANS_data_004" created.
+ echo 'deadline' >/sys/block/sdk/queue/scheduler 
+ echo '4096' >/sys/block/sdk/queue/read_ahead_kb 
+ wipefs -a /dev/sdk 
+Making disk LVM on slot 005 DSK:/dev/disk/by-id/wwn-0x5000c500ae7ec3bf
+     vgcreate sgt_vg_data_005 /dev/disk/by-id/wwn-0x5000c500ae7ec3bf 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae7ec3bf" successfully created.
+  Volume group "sgt_vg_data_005" successfully created
+     lvcreate -y -n EVANS_data_005 -l 1000.000000REE sgt_vg_data_005 
+  Logical volume "EVANS_data_005" created.
+ echo 'deadline' >/sys/block/sdl/queue/scheduler 
+ echo '4096' >/sys/block/sdl/queue/read_ahead_kb 
+ wipefs -a /dev/sdl 
+Making disk LVM on slot 006 DSK:/dev/disk/by-id/wwn-0x5000c500ae30dff3
+     vgcreate sgt_vg_data_006 /dev/disk/by-id/wwn-0x5000c500ae30dff3 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae30dff3" successfully created.
+  Volume group "sgt_vg_data_006" successfully created
+     lvcreate -y -n EVANS_data_006 -l 1000.000000REE sgt_vg_data_006 
+  Logical volume "EVANS_data_006" created.
+ echo 'deadline' >/sys/block/sdm/queue/scheduler 
+ echo '4096' >/sys/block/sdm/queue/read_ahead_kb 
+ wipefs -a /dev/sdm 
+Making disk LVM on slot 007 DSK:/dev/disk/by-id/wwn-0x5000c500ae29a2ef
+     vgcreate sgt_vg_data_007 /dev/disk/by-id/wwn-0x5000c500ae29a2ef 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae29a2ef" successfully created.
+  Volume group "sgt_vg_data_007" successfully created
+     lvcreate -y -n EVANS_data_007 -l 1000.000000REE sgt_vg_data_007 
+  Logical volume "EVANS_data_007" created.
+ echo 'deadline' >/sys/block/sdn/queue/scheduler 
+ echo '4096' >/sys/block/sdn/queue/read_ahead_kb 
+ wipefs -a /dev/sdn 
+Making disk LVM on slot 008 DSK:/dev/disk/by-id/wwn-0x5000c500ae632a83
+     vgcreate sgt_vg_data_008 /dev/disk/by-id/wwn-0x5000c500ae632a83 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae632a83" successfully created.
+  Volume group "sgt_vg_data_008" successfully created
+     lvcreate -y -n EVANS_data_008 -l 1000.000000REE sgt_vg_data_008 
+  Logical volume "EVANS_data_008" created.
+ echo 'deadline' >/sys/block/sdo/queue/scheduler 
+ echo '4096' >/sys/block/sdo/queue/read_ahead_kb 
+ wipefs -a /dev/sdo 
+Making disk LVM on slot 009 DSK:/dev/disk/by-id/wwn-0x5000c500ae6638d3
+     vgcreate sgt_vg_data_009 /dev/disk/by-id/wwn-0x5000c500ae6638d3 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae6638d3" successfully created.
+  Volume group "sgt_vg_data_009" successfully created
+     lvcreate -y -n EVANS_data_009 -l 1000.000000REE sgt_vg_data_009 
+  Logical volume "EVANS_data_009" created.
+ echo 'deadline' >/sys/block/sdp/queue/scheduler 
+ echo '4096' >/sys/block/sdp/queue/read_ahead_kb 
+ wipefs -a /dev/sdp 
+Making disk LVM on slot 010 DSK:/dev/disk/by-id/wwn-0x5000c500ae27ae17
+     vgcreate sgt_vg_data_010 /dev/disk/by-id/wwn-0x5000c500ae27ae17 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae27ae17" successfully created.
+  Volume group "sgt_vg_data_010" successfully created
+     lvcreate -y -n EVANS_data_010 -l 1000.000000REE sgt_vg_data_010 
+  Logical volume "EVANS_data_010" created.
+ echo 'deadline' >/sys/block/sdq/queue/scheduler 
+ echo '4096' >/sys/block/sdq/queue/read_ahead_kb 
+ wipefs -a /dev/sdq 
+Making disk LVM on slot 011 DSK:/dev/disk/by-id/wwn-0x5000c500ae32df5b
+     vgcreate sgt_vg_data_011 /dev/disk/by-id/wwn-0x5000c500ae32df5b 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae32df5b" successfully created.
+  Volume group "sgt_vg_data_011" successfully created
+     lvcreate -y -n EVANS_data_011 -l 1000.000000REE sgt_vg_data_011 
+  Logical volume "EVANS_data_011" created.
+/dev/sgt_vg_data_000/EVANS_data_000
+/dev/sgt_vg_data_001/EVANS_data_001
+/dev/sgt_vg_data_002/EVANS_data_002
+/dev/sgt_vg_data_003/EVANS_data_003
+/dev/sgt_vg_data_004/EVANS_data_004
+/dev/sgt_vg_data_005/EVANS_data_005
+/dev/sgt_vg_data_006/EVANS_data_006
+/dev/sgt_vg_data_007/EVANS_data_007
+/dev/sgt_vg_data_008/EVANS_data_008
+/dev/sgt_vg_data_009/EVANS_data_009
+/dev/sgt_vg_data_010/EVANS_data_010
+/dev/sgt_vg_data_011/EVANS_data_011
