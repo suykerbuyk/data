@@ -1,5 +1,3 @@
-fio: file /dev/sgt_vg_data_010_011/EVANS_data_010_011_128k exceeds 32-bit tausworthe random generator.
-fio: Switching to tausworthe64. Use the random_generator= option to get rid of this warning.
 {
   "fio version" : "fio-3.7",
   "timestamp" : 1589160543,
