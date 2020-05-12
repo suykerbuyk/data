@@ -30,6 +30,7 @@ do_fio_test() {
 				    --iodepth=$QUE \
 				    --numjobs=$JOBS \
 				    --direct=1 \
+				    --random_generator=tausworthe64 \
 				    --runtime=120 \
 				    --name="$PAT-$BLK" \
 				    --group_reporting  \
@@ -41,13 +42,20 @@ do_fio_test() {
 }
 
 mk_lvms | tee test.log
-for DTYPE in mach2 evans
+for DTYPE in mach2 evans evans_paired
 do
-	TDIR="${DTYPE}/${DISK_SCHEDULER}_${DISK_READ_AHEAD}"
+	if [[ "$WCE" == 0 ]]; then
+		WCE_DIR="wce_disabled"
+	elif [[ "$WCE" == 1 ]]; then
+		WCE_DIR="wce_enabled"
+	else
+		WCE_DIR="wce_unknown"
+	fi
+	TDIR="${DTYPE}/${WCE_DIR}/${DISK_SCHEDULER}_${DISK_READ_AHEAD}"
 	while read TGT
 	do
 		TNAME=$(basename $TGT)
-		do_fio_test $DTYPE $TGT $TNAME &	
+		do_fio_test $TDIR $TGT $TNAME &	
 	done <LVM_${DTYPE}.map
 done
 

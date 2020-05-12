@@ -18,14 +18,15 @@ TATSU=$TATSU_WWN_PREFIX
 LVM_STRIPE_SIZE=4 #k bytes
 INC_LVM_STRIPE_SIZE=1 #k if non-zero, double  strpe size with each volume created
 #DISK_READ_AHEAD=131072
-DISK_READ_AHEAD=4096
-#DISK_SCHEDULER='noop'
-DISK_SCHEDULER='deadline'
+OSD_READ_AHEAD=4096
+#OSD_SCHEDULER='noop'
+OSD_SCHEDULER='deadline'
 DSK_PATH='/dev/disk/by-id'
 LVM_VG_PREFIX='sgt_vg'
 LVM_LV_PREFIX='sgt_lv'
+WCE=0  # Set Write Cache Enable
 
-TOOL_REQUIREMENTS="lsscsi lvs pvs sg_vpd sg_ses sg_inq"
+TOOL_REQUIREMENTS="sdparm lsscsi lvs pvs sg_vpd sg_ses sg_inq"
 
 # Simple message output
 msg() {
@@ -110,7 +111,7 @@ mk_striped_lvm() {
 	STRIPE_SIZE=$2
 	DSK0=$3
 	DSK1=$4
-	LVM_LV_PREFIX="MACH2"
+	LVM_LV_PREFIX="$5"
 	msg "Making striped LVM on slot $SLOT DSK:$DSK1 DSK:$DSK2 STRIPE:$STRIPE_SIZE"
 	if [[ $# < 4 ]]; then
 		err "mk_striped_lvm Must supply slot, dsk1, dsk2 stripe_size"
@@ -137,7 +138,7 @@ mk_disk_lvm() {
 
 rm_vg_devs() {
 	msg "Purging volume groups"
-	for VG in $(ls  /dev/${LVM_VG_PREFIX}*/*)
+	for VG in $(ls  /dev/${LVM_VG_PREFIX}*/* 2>/dev/null)
 	do
 		wipefs -a ${VG}
 	done
@@ -158,6 +159,26 @@ set_drv_queue() {
 		run "echo '${OSD_READ_AHEAD}' >/sys/block/${1}/queue/read_ahead_kb" # Default = 4096
 	fi
 }
+set_drv_wce() {
+	DSKPATH="/dev/${1}"
+	if [[ ! -b ${DSKPATH} ]]; then
+		echo "$DSKPATH is not a valid disk path"
+		exit 1
+	fi
+	currentWCE="$(sdparm -q -g WCE $DSKPATH | awk -F ' ' '{print $2}')"	
+	echo -n  " $DSKPATH WCE=$currentWCE "
+	if [[ $WCE != $currentWCE ]] ; then
+		# Need to modify 
+		echo -n " Changing to -> $WCE "
+		if [[ "$WCE" == 1 ]] ; then
+			run "sdparm -q -s WCE $DSKPATH"
+		else
+			run "sdparm  -q -c WCE $DSKPATH"
+		fi
+	else
+		echo  "  "
+	fi
+}
 find_vg_count() {
 	lvs | grep ${LVM_VG_PREFIX} | wc -l
 }
@@ -168,14 +189,6 @@ print_drv_inventory() {
 	msg "Detected $NYTRO_DRV_COUNT Nytro drives"
 	msg "Detected $TOTAL_DRV_COUNT Total Drives"
 	msg "Detected $VG_COUNT Existing Volume Groups"
-}
-
-set_drv_queue() {
-	if [[ -b /dev/${1} ]]
-	then
-		run "echo '${DISK_SCHEDULER}' >/sys/block/${1}/queue/scheduler"       # noop, deadline, cfq
-		run "echo '${DISK_READ_AHEAD}' >/sys/block/${1}/queue/read_ahead_kb" # Default = 4096
-	fi
 }
 mk_nytro_lvm() {
 	msg "Creating Nytro LVM config"
@@ -214,7 +227,9 @@ mk_mach2_lvms() {
 		run "wipefs -a /dev/$KDEV1"
 		set_drv_queue $KDEV0
 		set_drv_queue $KDEV1
-		mk_striped_lvm $SLOT ${LVM_STRIPE_SIZE}k /dev/disk/by-id/$DSK0 /dev/disk/by-id/$DSK1
+		set_drv_wce $KDEV0
+		set_drv_wce $KDEV1
+		mk_striped_lvm $SLOT ${LVM_STRIPE_SIZE}k /dev/disk/by-id/$DSK0 /dev/disk/by-id/$DSK1 "MACH2"
 		if [[ $INC_LVM_STRIPE_SIZE == 1 ]]; then
 			LVM_STRIPE_SIZE=$((LVM_STRIPE_SIZE * 2))
 		fi
@@ -231,10 +246,38 @@ mk_evans_lvms() {
 		DSK0=$(cat EVANS.map | grep slot="$SLOT" | awk -F ' ' '{print $2}')
 		KDEV0=$(basename $(cat EVANS.map | grep slot="$SLOT" | awk -F ' ' '{print $5}'))
 		set_drv_queue $KDEV0
+		set_drv_wce $KDEV0
 		run "wipefs -a /dev/$KDEV0"
 		mk_disk_lvm $SLOT /dev/disk/by-id/$DSK0
 	done
 	lvdisplay | grep 'LV Path' | grep ${LVM_VG_PREFIX} | sort | awk -F ' ' '{print $3}' | tee LVM_evans.map
+}
+mk_evans_paired_lvm() {
+	if [[ $EVANS_DRV_COUNT == 0 ]] ; then
+		truncate -s 0 LVM_evans.map
+		return
+	fi
+	while read -r SLOT_A
+	do
+		read -r SLOT_B
+		DSK0="$(echo $SLOT_A  | awk -F ' ' '{print $2}' | sed 's/ //g')"
+		DSK1="$(echo $SLOT_B  | awk -F ' ' '{print $2}' | sed 's/ //g')"
+		KDEV0="$(echo $SLOT_A  | awk -F ' ' '{print $5}' | sed 's/ //g' | awk -F '/' '{print $3}')"
+		KDEV1="$(echo $SLOT_B  | awk -F ' ' '{print $5}' | sed 's/ //g' | awk -F '/' '{print $3}')"
+		SLOT0="$(echo $SLOT_A  | sed 's/=/ /g' | awk -F ' ' '{print $2}' | sed 's/ //g')"
+		SLOT1="$(echo $SLOT_B  | sed 's/=/ /g' | awk -F ' ' '{print $2}' | sed 's/ //g')"
+		run "wipefs -a /dev/$KDEV0"
+		run "wipefs -a /dev/$KDEV1"
+		set_drv_queue $KDEV0
+		set_drv_queue $KDEV1
+		set_drv_wce $KDEV0
+		set_drv_wce $KDEV1
+		mk_striped_lvm "${SLOT0}_${SLOT1}" ${LVM_STRIPE_SIZE}k /dev/disk/by-id/$DSK0 /dev/disk/by-id/$DSK1 "EVANS"
+		if [[ $INC_LVM_STRIPE_SIZE == 1 ]]; then
+			LVM_STRIPE_SIZE=$((LVM_STRIPE_SIZE * 2))
+		fi
+	done<EVANS.map
+	lvdisplay | grep 'LV Path' | grep ${LVM_VG_PREFIX} | sort | awk -F ' ' '{print $3}' | tee LVM_evans_paired.map
 }
 
 mk_lvms() {
@@ -243,5 +286,6 @@ mk_lvms() {
 	print_drv_inventory
 	rm_vg_devs
 	mk_mach2_lvms | tee LVM_MACH.log
-	mk_evans_lvms | tee LVM_EVANS.log
+	#mk_evans_lvms | tee LVM_EVANS.log
+	mk_evans_paired_lvm | tee LVM_EVANS.log
 }
