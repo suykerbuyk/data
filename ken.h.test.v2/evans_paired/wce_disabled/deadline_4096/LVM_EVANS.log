@@ -1,0 +1,102 @@
+ wipefs -a /dev/sdc 
+ wipefs -a /dev/sdd 
+ echo 'deadline' >/sys/block/sdc/queue/scheduler 
+ echo '4096' >/sys/block/sdc/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdd/queue/scheduler 
+ echo '4096' >/sys/block/sdd/queue/read_ahead_kb 
+ /dev/sdc WCE=0   
+ /dev/sdd WCE=0   
+Making striped LVM on slot 000_001 DSK:/dev/disk/by-id/wwn-0x5000c500ae5c9e03 DSK: STRIPE:4k
+     pvcreate /dev/disk/by-id/wwn-0x5000c500ae9ef1ff /dev/disk/by-id/wwn-0x5000c500ae5c9e03 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae9ef1ff" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae5c9e03" successfully created.
+     vgcreate --physicalextentsize 8M sgt_vg_data_000_001 /dev/disk/by-id/wwn-0x5000c500ae9ef1ff /dev/disk/by-id/wwn-0x5000c500ae5c9e03 
+  Volume group "sgt_vg_data_000_001" successfully created
+     lvcreate -y -i 2 -n EVANS_data_000_001_4k -l 1000.000000REE --type striped -I 4k sgt_vg_data_000_001 
+  Logical volume "EVANS_data_000_001_4k" created.
+ wipefs -a /dev/sdg 
+ wipefs -a /dev/sdh 
+ echo 'deadline' >/sys/block/sdg/queue/scheduler 
+ echo '4096' >/sys/block/sdg/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdh/queue/scheduler 
+ echo '4096' >/sys/block/sdh/queue/read_ahead_kb 
+ /dev/sdg WCE=0   
+ /dev/sdh WCE=0   
+Making striped LVM on slot 002_003 DSK:/dev/disk/by-id/wwn-0x5000c500ae6878e3 DSK: STRIPE:8k
+     pvcreate /dev/disk/by-id/wwn-0x5000c500ae7ec25b /dev/disk/by-id/wwn-0x5000c500ae6878e3 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae7ec25b" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae6878e3" successfully created.
+     vgcreate --physicalextentsize 8M sgt_vg_data_002_003 /dev/disk/by-id/wwn-0x5000c500ae7ec25b /dev/disk/by-id/wwn-0x5000c500ae6878e3 
+  Volume group "sgt_vg_data_002_003" successfully created
+     lvcreate -y -i 2 -n EVANS_data_002_003_8k -l 1000.000000REE --type striped -I 8k sgt_vg_data_002_003 
+  Logical volume "EVANS_data_002_003_8k" created.
+ wipefs -a /dev/sdj 
+ wipefs -a /dev/sdk 
+ echo 'deadline' >/sys/block/sdj/queue/scheduler 
+ echo '4096' >/sys/block/sdj/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdk/queue/scheduler 
+ echo '4096' >/sys/block/sdk/queue/read_ahead_kb 
+ /dev/sdj WCE=0   
+ /dev/sdk WCE=0   
+Making striped LVM on slot 004_005 DSK:/dev/disk/by-id/wwn-0x5000c500ae7ec3bf DSK: STRIPE:16k
+     pvcreate /dev/disk/by-id/wwn-0x5000c500ae2c702b /dev/disk/by-id/wwn-0x5000c500ae7ec3bf 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae2c702b" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae7ec3bf" successfully created.
+     vgcreate --physicalextentsize 8M sgt_vg_data_004_005 /dev/disk/by-id/wwn-0x5000c500ae2c702b /dev/disk/by-id/wwn-0x5000c500ae7ec3bf 
+  Volume group "sgt_vg_data_004_005" successfully created
+     lvcreate -y -i 2 -n EVANS_data_004_005_16k -l 1000.000000REE --type striped -I 16k sgt_vg_data_004_005 
+  Logical volume "EVANS_data_004_005_16k" created.
+ wipefs -a /dev/sdl 
+ wipefs -a /dev/sdm 
+ echo 'deadline' >/sys/block/sdl/queue/scheduler 
+ echo '4096' >/sys/block/sdl/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdm/queue/scheduler 
+ echo '4096' >/sys/block/sdm/queue/read_ahead_kb 
+ /dev/sdl WCE=0   
+ /dev/sdm WCE=0   
+Making striped LVM on slot 006_007 DSK:/dev/disk/by-id/wwn-0x5000c500ae29a2ef DSK: STRIPE:32k
+     pvcreate /dev/disk/by-id/wwn-0x5000c500ae30dff3 /dev/disk/by-id/wwn-0x5000c500ae29a2ef 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae30dff3" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae29a2ef" successfully created.
+     vgcreate --physicalextentsize 8M sgt_vg_data_006_007 /dev/disk/by-id/wwn-0x5000c500ae30dff3 /dev/disk/by-id/wwn-0x5000c500ae29a2ef 
+  Volume group "sgt_vg_data_006_007" successfully created
+     lvcreate -y -i 2 -n EVANS_data_006_007_32k -l 1000.000000REE --type striped -I 32k sgt_vg_data_006_007 
+  Logical volume "EVANS_data_006_007_32k" created.
+ wipefs -a /dev/sdn 
+ wipefs -a /dev/sdo 
+ echo 'deadline' >/sys/block/sdn/queue/scheduler 
+ echo '4096' >/sys/block/sdn/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdo/queue/scheduler 
+ echo '4096' >/sys/block/sdo/queue/read_ahead_kb 
+ /dev/sdn WCE=0   
+ /dev/sdo WCE=0   
+Making striped LVM on slot 008_009 DSK:/dev/disk/by-id/wwn-0x5000c500ae6638d3 DSK: STRIPE:64k
+     pvcreate /dev/disk/by-id/wwn-0x5000c500ae632a83 /dev/disk/by-id/wwn-0x5000c500ae6638d3 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae632a83" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae6638d3" successfully created.
+     vgcreate --physicalextentsize 8M sgt_vg_data_008_009 /dev/disk/by-id/wwn-0x5000c500ae632a83 /dev/disk/by-id/wwn-0x5000c500ae6638d3 
+  Volume group "sgt_vg_data_008_009" successfully created
+     lvcreate -y -i 2 -n EVANS_data_008_009_64k -l 1000.000000REE --type striped -I 64k sgt_vg_data_008_009 
+  Logical volume "EVANS_data_008_009_64k" created.
+ wipefs -a /dev/sdp 
+ wipefs -a /dev/sdq 
+ echo 'deadline' >/sys/block/sdp/queue/scheduler 
+ echo '4096' >/sys/block/sdp/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdq/queue/scheduler 
+ echo '4096' >/sys/block/sdq/queue/read_ahead_kb 
+ /dev/sdp WCE=0   
+ /dev/sdq WCE=0   
+Making striped LVM on slot 010_011 DSK:/dev/disk/by-id/wwn-0x5000c500ae32df5b DSK: STRIPE:128k
+     pvcreate /dev/disk/by-id/wwn-0x5000c500ae27ae17 /dev/disk/by-id/wwn-0x5000c500ae32df5b 
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae27ae17" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x5000c500ae32df5b" successfully created.
+     vgcreate --physicalextentsize 8M sgt_vg_data_010_011 /dev/disk/by-id/wwn-0x5000c500ae27ae17 /dev/disk/by-id/wwn-0x5000c500ae32df5b 
+  Volume group "sgt_vg_data_010_011" successfully created
+     lvcreate -y -i 2 -n EVANS_data_010_011_128k -l 1000.000000REE --type striped -I 128k sgt_vg_data_010_011 
+  Logical volume "EVANS_data_010_011_128k" created.
+/dev/sgt_vg_data_000_001/EVANS_data_000_001_4k
+/dev/sgt_vg_data_002_003/EVANS_data_002_003_8k
+/dev/sgt_vg_data_004_005/EVANS_data_004_005_16k
+/dev/sgt_vg_data_006_007/EVANS_data_006_007_32k
+/dev/sgt_vg_data_008_009/EVANS_data_008_009_64k
+/dev/sgt_vg_data_010_011/EVANS_data_010_011_128k
