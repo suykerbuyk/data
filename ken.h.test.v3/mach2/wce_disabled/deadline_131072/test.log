@@ -1,0 +1,323 @@
+Have sdparm
+Have lsscsi
+Have lvs
+Have pvs
+Have sg_vpd
+Have sg_ses
+Have sg_inq
+Building Disk Maps...
+  MACH2 (wwn-0x6000c500a):
+  EVANS (wwn-0x5000c500a):
+  TATSU (wwn-0x5000c5009):
+Detected 0 Evans drives
+Detected 12 Mach2 drives
+Detected  Nytro drives
+Detected  Total Drives
+Detected  Existing Volume Groups
+Purging volume groups
+PVS=/dev/sda /dev/sdb 
+    vgremove -y sgt_vg_data_000 
+  Logical volume "MACH2_data_000_4k" successfully removed
+  Volume group "sgt_vg_data_000" successfully removed
+    pvremove -y /dev/sda /dev/sdb  
+  Labels on physical volume "/dev/sda" successfully wiped.
+  Labels on physical volume "/dev/sdb" successfully wiped.
+PVS=/dev/sdc /dev/sdd 
+    vgremove -y sgt_vg_data_001 
+  Logical volume "MACH2_data_001_8k" successfully removed
+  Volume group "sgt_vg_data_001" successfully removed
+    pvremove -y /dev/sdc /dev/sdd  
+  Labels on physical volume "/dev/sdc" successfully wiped.
+  Labels on physical volume "/dev/sdd" successfully wiped.
+PVS=/dev/sde /dev/sdf 
+    vgremove -y sgt_vg_data_002 
+  Logical volume "MACH2_data_002_16k" successfully removed
+  Volume group "sgt_vg_data_002" successfully removed
+    pvremove -y /dev/sde /dev/sdf  
+  Labels on physical volume "/dev/sde" successfully wiped.
+  Labels on physical volume "/dev/sdf" successfully wiped.
+PVS=/dev/sdg /dev/sdh 
+    vgremove -y sgt_vg_data_003 
+  Logical volume "MACH2_data_003_32k" successfully removed
+  Volume group "sgt_vg_data_003" successfully removed
+    pvremove -y /dev/sdg /dev/sdh  
+  Labels on physical volume "/dev/sdg" successfully wiped.
+  Labels on physical volume "/dev/sdh" successfully wiped.
+PVS=/dev/sdi /dev/sdj 
+    vgremove -y sgt_vg_data_004 
+  Logical volume "MACH2_data_004_64k" successfully removed
+  Volume group "sgt_vg_data_004" successfully removed
+    pvremove -y /dev/sdi /dev/sdj  
+  Labels on physical volume "/dev/sdi" successfully wiped.
+  Labels on physical volume "/dev/sdj" successfully wiped.
+PVS=/dev/sdk /dev/sdl 
+    vgremove -y sgt_vg_data_005 
+  Logical volume "MACH2_data_005_128k" successfully removed
+  Volume group "sgt_vg_data_005" successfully removed
+    pvremove -y /dev/sdk /dev/sdl  
+  Labels on physical volume "/dev/sdk" successfully wiped.
+  Labels on physical volume "/dev/sdl" successfully wiped.
+PVS=/dev/sdm /dev/sdn 
+    vgremove -y sgt_vg_data_006 
+  Logical volume "MACH2_data_006_256k" successfully removed
+  Volume group "sgt_vg_data_006" successfully removed
+    pvremove -y /dev/sdm /dev/sdn  
+  Labels on physical volume "/dev/sdm" successfully wiped.
+  Labels on physical volume "/dev/sdn" successfully wiped.
+PVS=/dev/sdo /dev/sdp 
+    vgremove -y sgt_vg_data_007 
+  Logical volume "MACH2_data_007_512k" successfully removed
+  Volume group "sgt_vg_data_007" successfully removed
+    pvremove -y /dev/sdo /dev/sdp  
+  Labels on physical volume "/dev/sdo" successfully wiped.
+  Labels on physical volume "/dev/sdp" successfully wiped.
+PVS=/dev/sdq /dev/sdr 
+    vgremove -y sgt_vg_data_008 
+  Logical volume "MACH2_data_008_1024k" successfully removed
+  Volume group "sgt_vg_data_008" successfully removed
+    pvremove -y /dev/sdq /dev/sdr  
+  Labels on physical volume "/dev/sdq" successfully wiped.
+  Labels on physical volume "/dev/sdr" successfully wiped.
+PVS=/dev/sds /dev/sdt 
+    vgremove -y sgt_vg_data_009 
+  Logical volume "MACH2_data_009_2048k" successfully removed
+  Volume group "sgt_vg_data_009" successfully removed
+    pvremove -y /dev/sds /dev/sdt  
+  Labels on physical volume "/dev/sds" successfully wiped.
+  Labels on physical volume "/dev/sdt" successfully wiped.
+PVS=/dev/sdu /dev/sdv 
+    vgremove -y sgt_vg_data_010 
+  Logical volume "MACH2_data_010_4096k" successfully removed
+  Volume group "sgt_vg_data_010" successfully removed
+    pvremove -y /dev/sdu /dev/sdv  
+  Labels on physical volume "/dev/sdu" successfully wiped.
+  Labels on physical volume "/dev/sdv" successfully wiped.
+PVS=/dev/sdw /dev/sdx 
+    vgremove -y sgt_vg_data_011 
+  Logical volume "MACH2_data_011_8192k" successfully removed
+  Volume group "sgt_vg_data_011" successfully removed
+    pvremove -y /dev/sdw /dev/sdx  
+  Labels on physical volume "/dev/sdw" successfully wiped.
+  Labels on physical volume "/dev/sdx" successfully wiped.
+ wipefs -a /dev/sda 
+ wipefs -a /dev/sdb 
+ echo 'deadline' >/sys/block/sda/queue/scheduler 
+ echo '4096' >/sys/block/sda/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdb/queue/scheduler 
+ echo '4096' >/sys/block/sdb/queue/read_ahead_kb 
+ /dev/sda WCE=0   
+ /dev/sdb WCE=0   
+Making striped LVM on slot 000 DSK:/dev/disk/by-id/wwn-0x6000c500ae35cca70001000000000000 DSK: STRIPE:4096k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae35cca70000000000000000 /dev/disk/by-id/wwn-0x6000c500ae35cca70001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae35cca70000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae35cca70001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_000 /dev/disk/by-id/wwn-0x6000c500ae35cca70000000000000000 /dev/disk/by-id/wwn-0x6000c500ae35cca70001000000000000 
+  Volume group "sgt_vg_data_000" successfully created
+     lvcreate -y -i 2 -n MACH2_data_000_4096k -l 1000.000000REE --type striped -I 4096k sgt_vg_data_000 
+  Logical volume "MACH2_data_000_4096k" created.
+ wipefs -a /dev/sdc 
+ wipefs -a /dev/sdd 
+ echo 'deadline' >/sys/block/sdc/queue/scheduler 
+ echo '4096' >/sys/block/sdc/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdd/queue/scheduler 
+ echo '4096' >/sys/block/sdd/queue/read_ahead_kb 
+ /dev/sdc WCE=0   
+ /dev/sdd WCE=0   
+Making striped LVM on slot 001 DSK:/dev/disk/by-id/wwn-0x6000c500ae36011b0001000000000000 DSK: STRIPE:8192k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae36011b0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae36011b0001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae36011b0000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae36011b0001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_001 /dev/disk/by-id/wwn-0x6000c500ae36011b0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae36011b0001000000000000 
+  Volume group "sgt_vg_data_001" successfully created
+     lvcreate -y -i 2 -n MACH2_data_001_8192k -l 1000.000000REE --type striped -I 8192k sgt_vg_data_001 
+  Logical volume "MACH2_data_001_8192k" created.
+ wipefs -a /dev/sde 
+ wipefs -a /dev/sdf 
+ echo 'deadline' >/sys/block/sde/queue/scheduler 
+ echo '4096' >/sys/block/sde/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdf/queue/scheduler 
+ echo '4096' >/sys/block/sdf/queue/read_ahead_kb 
+ /dev/sde WCE=0   
+ /dev/sdf WCE=0   
+Making striped LVM on slot 002 DSK:/dev/disk/by-id/wwn-0x6000c500ae3597a30001000000000000 DSK: STRIPE:16384k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae3597a30000000000000000 /dev/disk/by-id/wwn-0x6000c500ae3597a30001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae3597a30000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae3597a30001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_002 /dev/disk/by-id/wwn-0x6000c500ae3597a30000000000000000 /dev/disk/by-id/wwn-0x6000c500ae3597a30001000000000000 
+  Volume group "sgt_vg_data_002" successfully created
+     lvcreate -y -i 2 -n MACH2_data_002_16384k -l 1000.000000REE --type striped -I 16384k sgt_vg_data_002 
+  Logical volume "MACH2_data_002_16384k" created.
+ wipefs -a /dev/sdg 
+ wipefs -a /dev/sdh 
+ echo 'deadline' >/sys/block/sdg/queue/scheduler 
+ echo '4096' >/sys/block/sdg/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdh/queue/scheduler 
+ echo '4096' >/sys/block/sdh/queue/read_ahead_kb 
+ /dev/sdg WCE=0   
+ /dev/sdh WCE=0   
+Making striped LVM on slot 003 DSK:/dev/disk/by-id/wwn-0x6000c500ae6b2a8b0001000000000000 DSK: STRIPE:32768k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae6b2a8b0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae6b2a8b0001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae6b2a8b0000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae6b2a8b0001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_003 /dev/disk/by-id/wwn-0x6000c500ae6b2a8b0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae6b2a8b0001000000000000 
+  Volume group "sgt_vg_data_003" successfully created
+     lvcreate -y -i 2 -n MACH2_data_003_32768k -l 1000.000000REE --type striped -I 32768k sgt_vg_data_003 
+  Rounding size (834494 extents) down to stripe boundary size (834492 extents)
+  Reducing requested stripe size 32.00 MiB to maximum, physical extent size 16.00 MiB.
+  Logical volume "MACH2_data_003_32768k" created.
+ wipefs -a /dev/sdi 
+ wipefs -a /dev/sdj 
+ echo 'deadline' >/sys/block/sdi/queue/scheduler 
+ echo '4096' >/sys/block/sdi/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdj/queue/scheduler 
+ echo '4096' >/sys/block/sdj/queue/read_ahead_kb 
+ /dev/sdi WCE=0   
+ /dev/sdj WCE=0   
+Making striped LVM on slot 004 DSK:/dev/disk/by-id/wwn-0x6000c500ae359ccf0001000000000000 DSK: STRIPE:65536k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae359ccf0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae359ccf0001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae359ccf0000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae359ccf0001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_004 /dev/disk/by-id/wwn-0x6000c500ae359ccf0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae359ccf0001000000000000 
+  Volume group "sgt_vg_data_004" successfully created
+     lvcreate -y -i 2 -n MACH2_data_004_65536k -l 1000.000000REE --type striped -I 65536k sgt_vg_data_004 
+  Rounding size (834494 extents) down to stripe boundary size (834488 extents)
+  Reducing requested stripe size 64.00 MiB to maximum, physical extent size 16.00 MiB.
+  Logical volume "MACH2_data_004_65536k" created.
+ wipefs -a /dev/sdk 
+ wipefs -a /dev/sdl 
+ echo 'deadline' >/sys/block/sdk/queue/scheduler 
+ echo '4096' >/sys/block/sdk/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdl/queue/scheduler 
+ echo '4096' >/sys/block/sdl/queue/read_ahead_kb 
+ /dev/sdk WCE=0   
+ /dev/sdl WCE=0   
+Making striped LVM on slot 005 DSK:/dev/disk/by-id/wwn-0x6000c500ae35dd970001000000000000 DSK: STRIPE:131072k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae35dd970000000000000000 /dev/disk/by-id/wwn-0x6000c500ae35dd970001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae35dd970000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae35dd970001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_005 /dev/disk/by-id/wwn-0x6000c500ae35dd970000000000000000 /dev/disk/by-id/wwn-0x6000c500ae35dd970001000000000000 
+  Volume group "sgt_vg_data_005" successfully created
+     lvcreate -y -i 2 -n MACH2_data_005_131072k -l 1000.000000REE --type striped -I 131072k sgt_vg_data_005 
+  Rounding size (834494 extents) down to stripe boundary size (834480 extents)
+  Reducing requested stripe size 128.00 MiB to maximum, physical extent size 16.00 MiB.
+  Logical volume "MACH2_data_005_131072k" created.
+ wipefs -a /dev/sdm 
+ wipefs -a /dev/sdn 
+ echo 'deadline' >/sys/block/sdm/queue/scheduler 
+ echo '4096' >/sys/block/sdm/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdn/queue/scheduler 
+ echo '4096' >/sys/block/sdn/queue/read_ahead_kb 
+ /dev/sdm WCE=0   
+ /dev/sdn WCE=0   
+Making striped LVM on slot 006 DSK:/dev/disk/by-id/wwn-0x6000c500ae35dcff0001000000000000 DSK: STRIPE:262144k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae35dcff0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae35dcff0001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae35dcff0000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae35dcff0001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_006 /dev/disk/by-id/wwn-0x6000c500ae35dcff0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae35dcff0001000000000000 
+  Volume group "sgt_vg_data_006" successfully created
+     lvcreate -y -i 2 -n MACH2_data_006_262144k -l 1000.000000REE --type striped -I 262144k sgt_vg_data_006 
+  Rounding size (834494 extents) down to stripe boundary size (834464 extents)
+  Reducing requested stripe size 256.00 MiB to maximum, physical extent size 16.00 MiB.
+  Logical volume "MACH2_data_006_262144k" created.
+ wipefs -a /dev/sdo 
+ wipefs -a /dev/sdp 
+ echo 'deadline' >/sys/block/sdo/queue/scheduler 
+ echo '4096' >/sys/block/sdo/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdp/queue/scheduler 
+ echo '4096' >/sys/block/sdp/queue/read_ahead_kb 
+ /dev/sdo WCE=0   
+ /dev/sdp WCE=0   
+Making striped LVM on slot 007 DSK:/dev/disk/by-id/wwn-0x6000c500ae6b2dff0001000000000000 DSK: STRIPE:524288k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae6b2dff0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae6b2dff0001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae6b2dff0000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae6b2dff0001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_007 /dev/disk/by-id/wwn-0x6000c500ae6b2dff0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae6b2dff0001000000000000 
+  Volume group "sgt_vg_data_007" successfully created
+     lvcreate -y -i 2 -n MACH2_data_007_524288k -l 1000.000000REE --type striped -I 524288k sgt_vg_data_007 
+  Rounding size (834494 extents) down to stripe boundary size (834432 extents)
+  Reducing requested stripe size 512.00 MiB to maximum, physical extent size 16.00 MiB.
+  Logical volume "MACH2_data_007_524288k" created.
+ wipefs -a /dev/sdq 
+ wipefs -a /dev/sdr 
+ echo 'deadline' >/sys/block/sdq/queue/scheduler 
+ echo '4096' >/sys/block/sdq/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdr/queue/scheduler 
+ echo '4096' >/sys/block/sdr/queue/read_ahead_kb 
+ /dev/sdq WCE=0   
+ /dev/sdr WCE=0   
+Making striped LVM on slot 008 DSK:/dev/disk/by-id/wwn-0x6000c500ae3581ef0001000000000000 DSK: STRIPE:1048576k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae3581ef0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae3581ef0001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae3581ef0000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae3581ef0001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_008 /dev/disk/by-id/wwn-0x6000c500ae3581ef0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae3581ef0001000000000000 
+  Volume group "sgt_vg_data_008" successfully created
+     lvcreate -y -i 2 -n MACH2_data_008_1048576k -l 1000.000000REE --type striped -I 1048576k sgt_vg_data_008 
+  Rounding size (834494 extents) down to stripe boundary size (834432 extents)
+  Reducing requested stripe size 1.00 GiB to maximum, physical extent size 16.00 MiB.
+  Logical volume "MACH2_data_008_1048576k" created.
+ wipefs -a /dev/sds 
+ wipefs -a /dev/sdt 
+ echo 'deadline' >/sys/block/sds/queue/scheduler 
+ echo '4096' >/sys/block/sds/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdt/queue/scheduler 
+ echo '4096' >/sys/block/sdt/queue/read_ahead_kb 
+ /dev/sds WCE=0   
+ /dev/sdt WCE=0   
+Making striped LVM on slot 009 DSK:/dev/disk/by-id/wwn-0x6000c500ae35feeb0001000000000000 DSK: STRIPE:2097152k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae35feeb0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae35feeb0001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae35feeb0000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae35feeb0001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_009 /dev/disk/by-id/wwn-0x6000c500ae35feeb0000000000000000 /dev/disk/by-id/wwn-0x6000c500ae35feeb0001000000000000 
+  Volume group "sgt_vg_data_009" successfully created
+     lvcreate -y -i 2 -n MACH2_data_009_2097152k -l 1000.000000REE --type striped -I 2097152k sgt_vg_data_009 
+  Rounding size (834494 extents) down to stripe boundary size (834304 extents)
+  Reducing requested stripe size 2.00 GiB to maximum, physical extent size 16.00 MiB.
+  Logical volume "MACH2_data_009_2097152k" created.
+ wipefs -a /dev/sdu 
+ wipefs -a /dev/sdv 
+ echo 'deadline' >/sys/block/sdu/queue/scheduler 
+ echo '4096' >/sys/block/sdu/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdv/queue/scheduler 
+ echo '4096' >/sys/block/sdv/queue/read_ahead_kb 
+ /dev/sdu WCE=0   
+ /dev/sdv WCE=0   
+Making striped LVM on slot 010 DSK:/dev/disk/by-id/wwn-0x6000c500ae33c2430001000000000000 DSK: STRIPE:4194304k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae33c2430000000000000000 /dev/disk/by-id/wwn-0x6000c500ae33c2430001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae33c2430000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae33c2430001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_010 /dev/disk/by-id/wwn-0x6000c500ae33c2430000000000000000 /dev/disk/by-id/wwn-0x6000c500ae33c2430001000000000000 
+  Volume group "sgt_vg_data_010" successfully created
+     lvcreate -y -i 2 -n MACH2_data_010_4194304k -l 1000.000000REE --type striped -I 4194304k sgt_vg_data_010 
+  Rounding size (834494 extents) down to stripe boundary size (834048 extents)
+  Reducing requested stripe size 4.00 GiB to maximum, physical extent size 16.00 MiB.
+  Logical volume "MACH2_data_010_4194304k" created.
+ wipefs -a /dev/sdw 
+ wipefs -a /dev/sdx 
+ echo 'deadline' >/sys/block/sdw/queue/scheduler 
+ echo '4096' >/sys/block/sdw/queue/read_ahead_kb 
+ echo 'deadline' >/sys/block/sdx/queue/scheduler 
+ echo '4096' >/sys/block/sdx/queue/read_ahead_kb 
+ /dev/sdw WCE=0   
+ /dev/sdx WCE=0   
+Making striped LVM on slot 011 DSK:/dev/disk/by-id/wwn-0x6000c500ae3609170001000000000000 DSK: STRIPE:8388608k
+     pvcreate /dev/disk/by-id/wwn-0x6000c500ae3609170000000000000000 /dev/disk/by-id/wwn-0x6000c500ae3609170001000000000000 
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae3609170000000000000000" successfully created.
+  Physical volume "/dev/disk/by-id/wwn-0x6000c500ae3609170001000000000000" successfully created.
+     vgcreate --physicalextentsize 16M sgt_vg_data_011 /dev/disk/by-id/wwn-0x6000c500ae3609170000000000000000 /dev/disk/by-id/wwn-0x6000c500ae3609170001000000000000 
+  Volume group "sgt_vg_data_011" successfully created
+     lvcreate -y -i 2 -n MACH2_data_011_8388608k -l 1000.000000REE --type striped -I 8388608k sgt_vg_data_011 
+  Rounding size (834494 extents) down to stripe boundary size (833536 extents)
+  Reducing requested stripe size 8.00 GiB to maximum, physical extent size 16.00 MiB.
+  Logical volume "MACH2_data_011_8388608k" created.
+/dev/sgt_vg_data_000/MACH2_data_000_4096k
+/dev/sgt_vg_data_001/MACH2_data_001_8192k
+/dev/sgt_vg_data_002/MACH2_data_002_16384k
+/dev/sgt_vg_data_003/MACH2_data_003_32768k
+/dev/sgt_vg_data_004/MACH2_data_004_65536k
+/dev/sgt_vg_data_005/MACH2_data_005_131072k
+/dev/sgt_vg_data_006/MACH2_data_006_262144k
+/dev/sgt_vg_data_007/MACH2_data_007_524288k
+/dev/sgt_vg_data_008/MACH2_data_008_1048576k
+/dev/sgt_vg_data_009/MACH2_data_009_2097152k
+/dev/sgt_vg_data_010/MACH2_data_010_4194304k
+/dev/sgt_vg_data_011/MACH2_data_011_8388608k
